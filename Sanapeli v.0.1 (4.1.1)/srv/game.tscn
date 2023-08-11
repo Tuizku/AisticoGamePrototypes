@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://b08v0tqcu08xg"]
+
+[ext_resource type="Texture2D" uid="uid://bcils3qf5q4ux" path="res://sprites/char_box.png" id="1_lkj5s"]
+[ext_resource type="Script" path="res://srv/game_controller.gd" id="1_qipcg"]
+[ext_resource type="Script" path="res://srv/select_char_box.gd" id="3_b14rv"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qipcg")
+
+[node name="Word Char Box 1" type="TextureRect" parent="."]
+offset_left = 100.0
+offset_top = 116.0
+offset_right = 210.0
+offset_bottom = 226.0
+texture = ExtResource("1_lkj5s")
+
+[node name="Word Char Box 2" type="TextureRect" parent="."]
+offset_left = 263.0
+offset_top = 117.0
+offset_right = 373.0
+offset_bottom = 227.0
+texture = ExtResource("1_lkj5s")
+
+[node name="Word Char Box 3" type="TextureRect" parent="."]
+offset_left = 426.0
+offset_top = 117.0
+offset_right = 536.0
+offset_bottom = 227.0
+texture = ExtResource("1_lkj5s")
+
+[node name="Word Char Box 4" type="TextureRect" parent="."]
+offset_left = 590.0
+offset_top = 117.0
+offset_right = 700.0
+offset_bottom = 227.0
+texture = ExtResource("1_lkj5s")
+
+[node name="Select Char Box 1" type="TextureRect" parent="."]
+offset_left = 100.0
+offset_top = 316.0
+offset_right = 210.0
+offset_bottom = 426.0
+texture = ExtResource("1_lkj5s")
+script = ExtResource("3_b14rv")
+
+[node name="Select Char Box 2" type="TextureRect" parent="."]
+offset_left = 263.0
+offset_top = 317.0
+offset_right = 373.0
+offset_bottom = 427.0
+texture = ExtResource("1_lkj5s")
+script = ExtResource("3_b14rv")
+index = 1
+
+[node name="Select Char Box 3" type="TextureRect" parent="."]
+offset_left = 426.0
+offset_top = 317.0
+offset_right = 536.0
+offset_bottom = 427.0
+texture = ExtResource("1_lkj5s")
+script = ExtResource("3_b14rv")
+index = 2
+
+[node name="Select Char Box 4" type="TextureRect" parent="."]
+offset_left = 590.0
+offset_top = 317.0
+offset_right = 700.0
+offset_bottom = 427.0
+texture = ExtResource("1_lkj5s")
+script = ExtResource("3_b14rv")
+index = 3
+
+[connection signal="char_box_selected" from="." to="Select Char Box 1" method="_on_control_char_box_selected"]
+[connection signal="char_box_selected" from="." to="Select Char Box 2" method="_on_control_char_box_selected"]
+[connection signal="char_box_selected" from="." to="Select Char Box 3" method="_on_control_char_box_selected"]
+[connection signal="char_box_selected" from="." to="Select Char Box 4" method="_on_control_char_box_selected"]
