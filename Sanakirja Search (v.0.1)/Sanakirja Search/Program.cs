@@ -49,6 +49,10 @@ while (true)
         Console.WriteLine($"matches: {result}");
         Console.WriteLine("");
     }
+    else if (command == "wordgame")
+    {
+
+    }
 }
 
 string Input(string write)
