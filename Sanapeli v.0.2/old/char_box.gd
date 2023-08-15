@@ -15,4 +15,12 @@ func _on_Control_char_box_selected(box_index):
 
 
 func _on_Control_words_selected(hint_chrs):
-	if hint_chrs[index] != " ": get_child(0).text = hint_chrs[index]
+	if hint_chrs[index] != " ": get_child(0).text = hint_chrs[index].to_upper()
+
+
+func _on_Control_chrs_selected(_chrs):
+	if _chrs != " ": get_child(0).text = _chrs[index].to_upper()
+
+
+func _on_Control_char_chosen(_char, _index):
+	if index == _index: get_child(0).text = _char
