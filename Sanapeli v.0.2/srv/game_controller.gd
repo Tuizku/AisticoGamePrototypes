@@ -15,6 +15,7 @@ var chrs = "anlu"
 signal hint_created(_hint)
 signal chrs_created(_chrs)
 signal char_box_selected(_box_index)
+signal editing_char_selected(_index)
 signal char_chosen(_char, _index)
 
 
@@ -63,7 +64,9 @@ func check_word():
 	for i in word.length():
 		if word[i] == " ":
 			editingCharIndex = i
+			emit_signal("editing_char_selected", editingCharIndex)
 			return
 	# if word is filled, code gets here
+	emit_signal("editing_char_selected", -1)
 	if word in words: print("correct")
 	else: print("incorrect")

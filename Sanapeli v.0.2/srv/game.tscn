@@ -86,4 +86,5 @@ margin_bottom = -370.0
 [connection signal="char_box_selected" from="." to="Sel Char Boxes" method="_on_Control_char_box_selected"]
 [connection signal="char_chosen" from="." to="Word Char Boxes" method="_on_Control_char_chosen"]
 [connection signal="chrs_created" from="." to="Sel Char Boxes" method="_on_Control_chrs_created"]
+[connection signal="editing_char_selected" from="." to="Word Char Boxes" method="_on_Control_editing_char_selected"]
 [connection signal="hint_created" from="." to="Word Char Boxes" method="_on_Control_hint_created"]
