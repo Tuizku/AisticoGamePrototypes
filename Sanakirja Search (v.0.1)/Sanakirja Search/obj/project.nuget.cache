@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "XljKeK1UtMxKqgXOHHJVbh+Gz8IWu8oHW83tdZ3pd9Od+e9IP7V6GWaULknXiMbmnqGtnStQZUJJduTZ8/QddQ==",
+  "dgSpecHash": "qQPLJleERCWbeHJiM4H+EGUX1YP2RZPiVDBaiLgQDXfJrBoS+5jcQgKQbNBKfL4EsEqUni/bwEtBC6FXqVVEJQ==",
   "success": true,
   "projectFilePath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Tuisku\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

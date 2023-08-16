@@ -1,0 +1,127 @@
+[
+  {
+    "Words": [
+      "sade",
+      "säde",
+      "side",
+      "sidi"
+    ],
+    "Hint": [
+      "s",
+      " ",
+      "d",
+      " "
+    ],
+    "Chars": [
+      "a",
+      "i",
+      "ä",
+      "e"
+    ]
+  },
+  {
+    "Words": [
+      "kari",
+      "karu",
+      "kiri",
+      "kura",
+      "kuri",
+      "kuru"
+    ],
+    "Hint": [
+      "k",
+      " ",
+      "r",
+      " "
+    ],
+    "Chars": [
+      "a",
+      "i",
+      "ä",
+      "u"
+    ]
+  },
+  {
+    "Words": [
+      "alla",
+      "alla",
+      "alle",
+      "alle",
+      "aula"
+    ],
+    "Hint": [
+      "a",
+      " ",
+      "l",
+      " "
+    ],
+    "Chars": [
+      "a",
+      "u",
+      "e",
+      "l"
+    ]
+  },
+  {
+    "Words": [
+      "aali",
+      "alla",
+      "alla",
+      "alle",
+      "alle",
+      "alli"
+    ],
+    "Hint": [
+      "a",
+      " ",
+      "l",
+      " "
+    ],
+    "Chars": [
+      "a",
+      "i",
+      "e",
+      "l"
+    ]
+  },
+  {
+    "Words": [
+      "neli",
+      "nila",
+      "nili",
+      "nolo"
+    ],
+    "Hint": [
+      "n",
+      " ",
+      "l",
+      " "
+    ],
+    "Chars": [
+      "a",
+      "o",
+      "i",
+      "e"
+    ]
+  },
+  {
+    "Words": [
+      "käsi",
+      "kisu",
+      "kusi",
+      "kusu"
+    ],
+    "Hint": [
+      "k",
+      " ",
+      "s",
+      " "
+    ],
+    "Chars": [
+      "ä",
+      "i",
+      "u",
+      "y"
+    ]
+  }
+]
