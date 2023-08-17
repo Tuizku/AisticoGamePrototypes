@@ -7,7 +7,7 @@ var originalPoses = []
 func _ready():
 	for i in get_child_count():
 		boxes.append(get_child(i))
-		boxTexts.append(boxes[i].get_child(0))
+		boxTexts.append(boxes[i].get_child(0).get_child(0))
 		originalPoses.append(boxes[i].rect_position)
 		#boxTexts[i].bbcode = true
 		boxTexts[i].bbcode_enabled = true
@@ -15,8 +15,35 @@ func _ready():
 func changeText(_richtext, _str):
 	_richtext.bbcode_text = "[center]" + _str.to_upper()
 
+func create_char_boxes(_count):
+	# Find the right size for boxes
+	var boxSize = 1
+	var sum = boxSize * _count + boxSize * 0.5 * (_count + 1)
+	boxSize = 1 / sum
+	print(boxSize)
+	
+	var scene = load("res://srv/char_box.tscn")
+	for i in _count:
+		# Create and Setup
+		var box = scene.instance()
+		var boxText = box.get_child(0).get_child(0)
+		add_child(box)
+		boxes.append(box)
+		boxTexts.append(boxText)
+		
+		# Set Anchors		
+		box.anchor_left = boxSize * i + boxSize * 0.5 * (i + 1)
+		box.anchor_right = box.anchor_left + boxSize
+		box.anchor_top = 0.25
+		box.anchor_bottom = box.anchor_top + boxSize
+		# Fixes stuff with the text centering (NOT FINISHED)
+		box.margin_right = 0
+		box.margin_bottom = box.rect_size.x / 2
+
+
 func _on_Control_hint_created(_hint):
-	for i in len(boxTexts):
+	create_char_boxes(len(_hint))
+	for i in len(_hint):		
 		changeText(boxTexts[i], _hint[i])
 
 

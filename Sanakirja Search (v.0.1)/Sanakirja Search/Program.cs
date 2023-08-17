@@ -75,7 +75,7 @@ while (true)
         List<char> letters = new();
 
         Random random = new Random();
-        for (int searchAttempts = 2000; searchAttempts > 0; searchAttempts--)
+        for (int searchAttempts = 10000; searchAttempts > 0; searchAttempts--)
         {
             // Add words that match the wordLength
             foundWords = new();
@@ -113,7 +113,7 @@ while (true)
 
             // Select random letters that the words need to have, remove those that don't match them
             letters = new();
-            if (foundWords.Count > 3)
+            if (foundWords.Count >= 3)
             {                
                 for (int att = 25; att > 0; att--)
                 {
@@ -165,7 +165,7 @@ while (true)
 
 
             // Print all words that are left
-            if (foundWords.Count > 3)
+            if (foundWords.Count >= 3)
             {
                 searchAttempts = 0;
                 for (int i = 0; i < foundWords.Count; i++) Console.WriteLine(foundWords[i]);

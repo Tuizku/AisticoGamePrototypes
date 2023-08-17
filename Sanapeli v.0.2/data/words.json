@@ -1,112 +1,8 @@
 [
   {
     "Words": [
-      "sade",
-      "säde",
-      "side",
-      "sidi"
-    ],
-    "Hint": [
-      "s",
-      " ",
-      "d",
-      " "
-    ],
-    "Chars": [
-      "a",
-      "i",
-      "ä",
-      "e"
-    ]
-  },
-  {
-    "Words": [
-      "kari",
-      "karu",
-      "kiri",
-      "kura",
-      "kuri",
-      "kuru"
-    ],
-    "Hint": [
-      "k",
-      " ",
-      "r",
-      " "
-    ],
-    "Chars": [
-      "a",
-      "i",
-      "ä",
-      "u"
-    ]
-  },
-  {
-    "Words": [
-      "alla",
-      "alla",
-      "alle",
-      "alle",
-      "aula"
-    ],
-    "Hint": [
-      "a",
-      " ",
-      "l",
-      " "
-    ],
-    "Chars": [
-      "a",
-      "u",
-      "e",
-      "l"
-    ]
-  },
-  {
-    "Words": [
-      "aali",
-      "alla",
-      "alla",
-      "alle",
-      "alle",
-      "alli"
-    ],
-    "Hint": [
-      "a",
-      " ",
-      "l",
-      " "
-    ],
-    "Chars": [
-      "a",
-      "i",
-      "e",
-      "l"
-    ]
-  },
-  {
-    "Words": [
-      "neli",
-      "nila",
-      "nili",
-      "nolo"
-    ],
-    "Hint": [
-      "n",
-      " ",
-      "l",
-      " "
-    ],
-    "Chars": [
-      "a",
-      "o",
-      "i",
-      "e"
-    ]
-  },
-  {
-    "Words": [
-      "käsi",
+      "kasa",
+      "kisa",
       "kisu",
       "kusi",
       "kusu"
@@ -118,10 +14,140 @@
       " "
     ],
     "Chars": [
-      "ä",
-      "i",
       "u",
-      "y"
+      "a",
+      "y",
+      "i"
+    ]
+  },
+  {
+    "Words": [
+      "kamu",
+      "kimo",
+      "koma",
+      "komi",
+      "kumi"
+    ],
+    "Hint": [
+      "k",
+      " ",
+      "m",
+      " "
+    ],
+    "Chars": [
+      "o",
+      "a",
+      "u",
+      "i"
+    ]
+  },
+  {
+    "Words": [
+      "sama",
+      "sima",
+      "soma",
+      "suma",
+      "sumu"
+    ],
+    "Hint": [
+      "s",
+      " ",
+      "m",
+      " "
+    ],
+    "Chars": [
+      "u",
+      "o",
+      "i",
+      "a"
+    ]
+  },
+  {
+    "Words": [
+      "karva",
+      "kirva",
+      "korva",
+      "kurvi"
+    ],
+    "Hint": [
+      "k",
+      " ",
+      "r",
+      "v",
+      " "
+    ],
+    "Chars": [
+      "i",
+      "a",
+      "o",
+      "u"
+    ]
+  },
+  {
+    "Words": [
+      "lasta",
+      "lastu",
+      "lesti",
+      "lista",
+      "luste"
+    ],
+    "Hint": [
+      "l",
+      " ",
+      "s",
+      "t",
+      " "
+    ],
+    "Chars": [
+      "a",
+      "e",
+      "i",
+      "u"
+    ]
+  },
+  {
+    "Words": [
+      "varas",
+      "varis",
+      "varsa",
+      "varsi",
+      "virsi",
+      "virta"
+    ],
+    "Hint": [
+      "v",
+      " ",
+      "r",
+      " ",
+      " "
+    ],
+    "Chars": [
+      "s",
+      "i",
+      "t",
+      "a"
+    ]
+  },
+  {
+    "Words": [
+      "vasikka",
+      "vaskata",
+      "vastata"
+    ],
+    "Hint": [
+      "v",
+      "a",
+      "s",
+      " ",
+      " ",
+      " ",
+      " "
+    ],
+    "Chars": [
+      "i",
+      "a",
+      "k",
+      "t"
     ]
   }
 ]

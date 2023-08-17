@@ -28,7 +28,7 @@ anchor_top = 0.65
 anchor_right = 0.47
 anchor_bottom = 0.85
 margin_right = -2.0
-margin_bottom = -370.0
+margin_bottom = 14.0
 
 [node name="Char Box 3" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.53
@@ -36,7 +36,7 @@ anchor_top = 0.65
 anchor_right = 0.67
 anchor_bottom = 0.85
 margin_right = -2.0
-margin_bottom = -370.0
+margin_bottom = 14.0
 
 [node name="Char Box 4" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.73
@@ -44,44 +44,12 @@ anchor_top = 0.65
 anchor_right = 0.87
 anchor_bottom = 0.85
 margin_right = -2.0
-margin_bottom = -370.0
+margin_bottom = 14.0
 
 [node name="Word Char Boxes" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
-
-[node name="Char Box 1" parent="Word Char Boxes" instance=ExtResource( 1 )]
-anchor_left = 0.13
-anchor_top = 0.25
-anchor_right = 0.27
-anchor_bottom = 0.45
-margin_right = -2.00002
-margin_bottom = 14.0
-
-[node name="Char Box 2" parent="Word Char Boxes" instance=ExtResource( 1 )]
-anchor_left = 0.33
-anchor_top = 0.25
-anchor_right = 0.47
-anchor_bottom = 0.45
-margin_right = -2.0
-margin_bottom = -370.0
-
-[node name="Char Box 3" parent="Word Char Boxes" instance=ExtResource( 1 )]
-anchor_left = 0.53
-anchor_top = 0.25
-anchor_right = 0.67
-anchor_bottom = 0.45
-margin_right = -2.0
-margin_bottom = -370.0
-
-[node name="Char Box 4" parent="Word Char Boxes" instance=ExtResource( 1 )]
-anchor_left = 0.73
-anchor_top = 0.25
-anchor_right = 0.87
-anchor_bottom = 0.45
-margin_right = -2.0
-margin_bottom = -370.0
 
 [connection signal="char_box_selected" from="." to="Sel Char Boxes" method="_on_Control_char_box_selected"]
 [connection signal="char_chosen" from="." to="Word Char Boxes" method="_on_Control_char_chosen"]
