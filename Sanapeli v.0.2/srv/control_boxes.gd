@@ -16,6 +16,12 @@ func changeText(_richtext, _str):
 	_richtext.bbcode_text = "[center]" + _str.to_upper()
 
 func create_char_boxes(_count):
+	# Delete old if there are
+	for i in get_child_count():
+		get_child(i).queue_free()
+	boxes.clear()
+	boxTexts.clear()
+	
 	# Find the right size for boxes
 	var boxSize = 1
 	var sum = boxSize * _count + boxSize * 0.5 * (_count + 1)
