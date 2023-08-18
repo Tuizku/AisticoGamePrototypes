@@ -1,5 +1,6 @@
 extends Control
 
+# Exports
 export var GameTime : float = 30
 
 # Variables
@@ -8,6 +9,8 @@ var boxSelectedTime : float = 0
 var editingCharIndex : int = 0
 var word : String = ""
 var timeLeft : float = 0
+var middleText
+var letterRarity : Array = ["aitneslo", "kuämvr", "jhypdögbfcwåqxz"] # x, z not in og data
 
 # Chosen Word Settings
 var wordsData
@@ -22,11 +25,7 @@ signal char_chosen(_char, _index)
 signal change_time(time)
 
 
-
-func _ready():
-	load_words()
-	new_word()	
-	timeLeft = GameTime
+# Word Functions
 func load_words():
 	var file = File.new()
 	if not file.file_exists("res://data/words.json"):
@@ -48,6 +47,32 @@ func new_word():
 	word = ""
 	for i in len(selectedWord["Hint"]): if selectedWord["Hint"][i] != "": word += selectedWord["Hint"][i]
 	check_word() # Finds the editingCharIndex
+func check_word():
+	# Checks the word, if it still has spaces, it selects a new editingCharIndex
+	# Else it will check if the word is included in words list
+	for i in word.length():
+		if word[i] == " ":
+			editingCharIndex = i
+			emit_signal("editing_char_selected", editingCharIndex)
+			return
+	# if word is filled, code gets here
+	emit_signal("editing_char_selected", -1)
+	if word in selectedWord["Words"]:
+		var points = 0
+		for chrI in len(word):
+			if selectedWord["Hint"][chrI] == " ":
+				if word[chrI] in letterRarity[0]: points += 5
+				elif word[chrI] in letterRarity[1]: points += 10
+				elif word[chrI] in letterRarity[2]: points += 25
+		show_text(str(points) + " pistettä", Color.green)
+	else: show_text("Väärin!", Color.lightcoral)
+
+
+func _ready():
+	load_words()
+	new_word()	
+	timeLeft = GameTime
+	middleText = get_node("Middle Text") as RichTextLabel
 
 func _physics_process(delta: float) -> void:
 	pc_inputs(delta)
@@ -89,15 +114,9 @@ func pc_inputs(delta_param : float):
 		check_word()
 		boxSelectedTime = 0
 
-# Checks the word, if it still has spaces, it selects a new editingCharIndex
-# Else it will check if the word is included in words list
-func check_word():
-	for i in word.length():
-		if word[i] == " ":
-			editingCharIndex = i
-			emit_signal("editing_char_selected", editingCharIndex)
-			return
-	# if word is filled, code gets here
-	emit_signal("editing_char_selected", -1)
-	if word in selectedWord["Words"]: print("correct")
-	else: print("incorrect")
+func show_text(text, color):
+	middleText.modulate = color
+	middleText.bbcode_text = "[center]" + text
+	yield(get_tree().create_timer(5.0), "timeout")
+	middleText.bbcode_text = ""
+	middleText.modulate = Color.white

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj": {}
+    "D:\\Files\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj": {}
   },
   "projects": {
-    "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj": {
+    "D:\\Files\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
+        "projectUniqueName": "D:\\Files\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
         "projectName": "Sanakirja Search",
-        "projectPath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
-        "packagesPath": "C:\\Users\\Tuisku\\.nuget\\packages\\",
-        "outputPath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\obj\\",
+        "projectPath": "D:\\Files\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Files\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Tuisku\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

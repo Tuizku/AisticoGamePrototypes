@@ -149,5 +149,352 @@
       "k",
       "t"
     ]
+  },
+  {
+    "Words": [
+      "minä",
+      "moni",
+      "mono"
+    ],
+    "Hint": [
+      "m",
+      " ",
+      " ",
+      " "
+    ],
+    "Chars": [
+      "i",
+      "ä",
+      "o",
+      "n"
+    ]
+  },
+  {
+    "Words": [
+      "kate",
+      "kati",
+      "katu",
+      "kita",
+      "kutu"
+    ],
+    "Hint": [
+      "k",
+      " ",
+      "t",
+      " "
+    ],
+    "Chars": [
+      "a",
+      "u",
+      "i",
+      "e"
+    ]
+  },
+  {
+    "Words": [
+      "otos",
+      "otsa",
+      "otto"
+    ],
+    "Hint": [
+      "o",
+      "t",
+      " ",
+      " "
+    ],
+    "Chars": [
+      "o",
+      "s",
+      "a",
+      "t"
+    ]
+  },
+  {
+    "Words": [
+      "näin",
+      "niin",
+      "noin"
+    ],
+    "Hint": [
+      "n",
+      " ",
+      "i",
+      " "
+    ],
+    "Chars": [
+      "n",
+      "o",
+      "ä",
+      "i"
+    ]
+  },
+  {
+    "Words": [
+      "vajaa",
+      "vakaa",
+      "valaa"
+    ],
+    "Hint": [
+      "v",
+      " ",
+      " ",
+      "a",
+      " "
+    ],
+    "Chars": [
+      "a",
+      "k",
+      "l",
+      "j"
+    ]
+  },
+  {
+    "Words": [
+      "suoja",
+      "suora",
+      "surra"
+    ],
+    "Hint": [
+      "s",
+      "u",
+      " ",
+      " ",
+      " "
+    ],
+    "Chars": [
+      "a",
+      "r",
+      "o",
+      "j"
+    ]
+  },
+  {
+    "Words": [
+      "peili",
+      "pelle",
+      "piilo",
+      "pilli",
+      "poolo"
+    ],
+    "Hint": [
+      "p",
+      " ",
+      " ",
+      "l",
+      " "
+    ],
+    "Chars": [
+      "e",
+      "i",
+      "l",
+      "o"
+    ]
+  },
+  {
+    "Words": [
+      "happo",
+      "heppa",
+      "hyppy"
+    ],
+    "Hint": [
+      "h",
+      " ",
+      "p",
+      "p",
+      " "
+    ],
+    "Chars": [
+      "y",
+      "o",
+      "a",
+      "e"
+    ]
+  },
+  {
+    "Words": [
+      "tahti",
+      "tahto",
+      "taito",
+      "tauti"
+    ],
+    "Hint": [
+      "t",
+      "a",
+      " ",
+      "t",
+      " "
+    ],
+    "Chars": [
+      "u",
+      "h",
+      "o",
+      "i"
+    ]
+  },
+  {
+    "Words": [
+      "hakea",
+      "hakka",
+      "hakku"
+    ],
+    "Hint": [
+      "h",
+      "a",
+      "k",
+      " ",
+      " "
+    ],
+    "Chars": [
+      "e",
+      "a",
+      "u",
+      "k"
+    ]
+  },
+  {
+    "Words": [
+      "katka",
+      "katko",
+      "katua"
+    ],
+    "Hint": [
+      "k",
+      "a",
+      "t",
+      " ",
+      " "
+    ],
+    "Chars": [
+      "o",
+      "u",
+      "k",
+      "a"
+    ]
+  },
+  {
+    "Words": [
+      "naara",
+      "naira",
+      "narri",
+      "nauru"
+    ],
+    "Hint": [
+      "n",
+      "a",
+      " ",
+      "r",
+      " "
+    ],
+    "Chars": [
+      "u",
+      "a",
+      "r",
+      "i"
+    ]
+  },
+  {
+    "Words": [
+      "kuitti",
+      "kuutio",
+      "kuutti"
+    ],
+    "Hint": [
+      "k",
+      "u",
+      " ",
+      "t",
+      " ",
+      " "
+    ],
+    "Chars": [
+      "t",
+      "i",
+      "o",
+      "u"
+    ]
+  },
+  {
+    "Words": [
+      "naaras",
+      "nauraa",
+      "nauris"
+    ],
+    "Hint": [
+      "n",
+      "a",
+      " ",
+      "r",
+      " ",
+      " "
+    ],
+    "Chars": [
+      "u",
+      "s",
+      "a",
+      "i"
+    ]
+  },
+  {
+    "Words": [
+      "koruna",
+      "kruuna",
+      "kruunu"
+    ],
+    "Hint": [
+      "k",
+      " ",
+      " ",
+      "u",
+      "n",
+      " "
+    ],
+    "Chars": [
+      "o",
+      "u",
+      "a",
+      "r"
+    ]
+  },
+  {
+    "Words": [
+      "korina",
+      "korona",
+      "koruna"
+    ],
+    "Hint": [
+      "k",
+      " ",
+      "r",
+      " ",
+      "n",
+      " "
+    ],
+    "Chars": [
+      "i",
+      "u",
+      "o",
+      "a"
+    ]
+  },
+  {
+    "Words": [
+      "lakata",
+      "lakota",
+      "lukita"
+    ],
+    "Hint": [
+      "l",
+      " ",
+      "k",
+      " ",
+      "t",
+      " "
+    ],
+    "Chars": [
+      "u",
+      "i",
+      "o",
+      "a"
+    ]
   }
 ]

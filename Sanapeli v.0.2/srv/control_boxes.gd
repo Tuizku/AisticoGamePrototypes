@@ -1,5 +1,7 @@
 extends Control
 
+var letterRarity : Array = ["aitneslo", "kuämvr", "jhypdögbfcwåqxz"]
+
 var boxes = []
 var boxTexts = []
 var originalPoses = []
@@ -46,6 +48,10 @@ func create_char_boxes(_count):
 		box.margin_right = 0
 		box.margin_bottom = box.rect_size.x / 2
 
+#func change_box_color(i):
+	#var string = boxTexts[i].bbcode_text[len(boxTexts[i].bbcode_text) - 1]
+	#var string = 
+	
 
 func _on_Control_hint_created(_hint):
 	create_char_boxes(len(_hint))
@@ -56,6 +62,10 @@ func _on_Control_hint_created(_hint):
 func _on_Control_chrs_created(_chrs):
 	for i in len(boxTexts):
 		changeText(boxTexts[i], _chrs[i])
+		if _chrs[i] in letterRarity[0]: boxes[i].modulate = Color.white
+		elif _chrs[i] in letterRarity[1]: boxes[i].modulate = Color.hotpink
+		elif _chrs[i] in letterRarity[2]: boxes[i].modulate = Color.yellow
+		#change_box_color(i)
 
 
 func _on_Control_char_box_selected(_box_index):
