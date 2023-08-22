@@ -1,11 +1,16 @@
-﻿using System.Text.RegularExpressions;
+﻿using Newtonsoft.Json;
+
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+
+using TextCopy;
 
 DirectoryInfo? dir = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location);
 List<string> wordBook = File.ReadAllLines($"{dir}/finnish_plain_words.txt").ToList();
 
 // Game Data Paths with different devices
-string laptopPath = "D:/Files/AisticoGamePrototypes/Sanapeli v.0.2/data/words.json";
-string pcPath = "D:/Coding Projects/Aistico Godot/AisticoGamePrototypes/Sanapeli v.0.2/data/words.json";
+string laptopPath = "D:/Files/AisticoGamePrototypes/Sanapeli v.0.3/data/words.json";
+string pcPath = "D:/Coding Projects/Aistico Godot/AisticoGamePrototypes/Sanapeli v.0.3/data/words.json";
 string gameDataPath = "";
 string pathCommand = Input("pc/laptop game data path?: ");
 if (pathCommand == "pc") gameDataPath = pcPath;
@@ -23,7 +28,7 @@ for (int i = 0; i < wordBook.Count; i++)
 
 wordBook = RemoveDuplicates(wordBook);
 
-Console.WriteLine("\ncommands: search/words/manywords/exit\n");
+Console.WriteLine("\ncommands: search/hintwords/words/manywords/exit\n");
 Console.WriteLine("sanakirja avattu");
 Console.WriteLine($"sanarivejä: {wordBook.Count}");
 Console.WriteLine();
@@ -320,6 +325,60 @@ while (true)
             }
         }
     }
+    else if (command == "hintwords")
+    {
+        int minWordLength = int.Parse(Input("min word length: "));
+        int maxWordLength = int.Parse(Input("max word length: "));
+        
+        List<string> wordMatches = SearchByLength(wordBook, minWordLength, maxWordLength);
+
+        Console.WriteLine("\nSelect words (yes = press enter) (no = type n) (stop = type stop)");
+        Console.WriteLine("-----------------------------------------------------------------");
+
+        // Setup Selecting
+        Random random = new Random();
+        List<string> selectedWords = new();
+        string selectCommand = "";
+
+        // Select words
+        while (selectCommand != "stop")
+        {
+            string word = wordMatches[random.Next(wordMatches.Count - 1)];
+            Console.Write(word + " ");
+            selectCommand = Input("/");
+            if (selectCommand != "n" && selectCommand != "stop") selectedWords.Add(word);
+        }
+
+        // Set ChatGPT command to be copied to clipboard
+        string chatGPTcommand = "anna sanoille erikseen lyhyt ja ytimekäs määritelmä, jolla voisi pelissä arvata sen sanan. Tee se JSONissa." +
+            "Muista pitää määritelmät muutamissa sanoissa.\n" +
+            "Käytä formaattia: [\r\n  {\r\n    \"word\": \"laskin\",\r\n    \"definition\": \"Laite matematiikan laskemiseen.\"\r\n  }\r\n]\n";
+        foreach (string word in selectedWords) chatGPTcommand += "\n" + word;
+        ClipboardService.SetText(chatGPTcommand);
+
+        // Wait for JSON
+        Console.WriteLine("command copied. paste it in chat gpt");
+        Console.WriteLine("waiting for copied json from chat gpt...");
+        bool clipboardIsJson = false;
+        while (clipboardIsJson == false)
+        {
+            clipboardIsJson = Save.IsJson(ClipboardService.GetText());
+        }
+        Console.WriteLine("json in clipboard\n");
+
+        // Save JSON
+        string? clip = ClipboardService.GetText();
+        if (clip == null) return;
+        List<HintWord>? wordsData = Save.LoadJson(gameDataPath, typeof(List<HintWord>)) as List<HintWord>;
+        List<HintWord>? copiedJson = Save.JsonToObject(clip, typeof(List<HintWord>)) as List<HintWord>;
+        if (wordsData == null) wordsData = new();
+        if (copiedJson == null) return;
+
+        foreach (HintWord w in copiedJson) wordsData.Add(w); // Add all new words to wordsData
+        Save.SaveJson(wordsData, gameDataPath);
+
+        Console.WriteLine("words saved successfully\n");
+    }
     else if (command == "exit") Environment.Exit(0);
 }
 
@@ -341,4 +400,14 @@ List<string> RemoveDuplicates(List<string> _words)
         lastWord = word;
     }
     return result;
+}
+
+List<string> SearchByLength(List<string> _words, int _min,  int _max)
+{
+    List<string> _result = new();
+    foreach (string _word in _words)
+    {
+        if (_word.Length >= _min && _word.Length <= _max) _result.Add(_word);
+    }
+    return _result;
 }

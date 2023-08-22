@@ -46,3 +46,5 @@ D:\Files\AisticoGamePrototypes\Sanakirja Search (v.0.1)\Sanakirja Search\obj\Deb
 D:\Files\AisticoGamePrototypes\Sanakirja Search (v.0.1)\Sanakirja Search\obj\Debug\net6.0\Sanakirja Search.pdb
 D:\Files\AisticoGamePrototypes\Sanakirja Search (v.0.1)\Sanakirja Search\obj\Debug\net6.0\Sanakirja Search.genruntimeconfig.cache
 D:\Files\AisticoGamePrototypes\Sanakirja Search (v.0.1)\Sanakirja Search\obj\Debug\net6.0\ref\Sanakirja Search.dll
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Sanakirja Search (v.0.1)\Sanakirja Search\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Sanakirja Search (v.0.1)\Sanakirja Search\bin\Debug\net6.0\TextCopy.dll
