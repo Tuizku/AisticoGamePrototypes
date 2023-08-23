@@ -66,7 +66,7 @@ func select_chrs():
 			single_chrs.pop_at(index)
 	
 	# Add random word start characters
-	var add_chars_amount = int((len(selectedWord["word"]) - 2) * (1 - difficulty))
+	var add_chars_amount = int((len(selectedWord["word"]) - 1) * (1 - difficulty))
 	print(add_chars_amount)
 	add_chars_amount -= funcs.chrs_in(word_start_chrs)
 	print(add_chars_amount)

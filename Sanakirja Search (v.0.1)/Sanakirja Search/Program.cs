@@ -350,9 +350,10 @@ while (true)
         }
 
         // Set ChatGPT command to be copied to clipboard
-        string chatGPTcommand = "anna sanoille erikseen lyhyt ja ytimekäs määritelmä, jolla voisi pelissä arvata sen sanan. Tee se JSONissa." +
+        string chatGPTcommand = "anna sanoille erikseen lyhyt ja ytimekäs määritelmä, jolla voisi pelissä arvata sen sanan. " +
+            "Tee se JSONissa, ja käytä listan muuttujissa termejä: word ja definition" +
             "Muista pitää määritelmät muutamissa sanoissa.\n" +
-            "Käytä formaattia: [\r\n  {\r\n    \"word\": \"laskin\",\r\n    \"definition\": \"Laite matematiikan laskemiseen.\"\r\n  }\r\n]\n";
+            "Käytä formaattia:\n[\r\n  {\r\n    \"word\": \"jahti\",\r\n    \"definition\": \"Metsästysretki tai suuri vene.\"\r\n  },\r\n  {\r\n    \"word\": \"kävely\",\r\n    \"definition\": \"Hitaasti etenevä liikkumistapa, yleensä jalkaisin.\"\r\n  }\n";
         foreach (string word in selectedWords) chatGPTcommand += "\n" + word;
         ClipboardService.SetText(chatGPTcommand);
 
