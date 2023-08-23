@@ -5,7 +5,7 @@
 [ext_resource path="res://srv/control_boxes.gd" type="Script" id=3]
 [ext_resource path="res://sprites/time slider.png" type="Texture" id=4]
 [ext_resource path="res://srv/time.gd" type="Script" id=5]
-[ext_resource path="res://srv/font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://srv/hint font.tres" type="DynamicFont" id=6]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -19,33 +19,33 @@ script = ExtResource( 3 )
 
 [node name="Char Box 1" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.13
-anchor_top = 0.65
+anchor_top = 0.7
 anchor_right = 0.27
-anchor_bottom = 0.85
+anchor_bottom = 0.9
 margin_right = -2.00002
 margin_bottom = 14.0
 
 [node name="Char Box 2" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.33
-anchor_top = 0.65
+anchor_top = 0.7
 anchor_right = 0.47
-anchor_bottom = 0.85
+anchor_bottom = 0.9
 margin_right = -2.0
 margin_bottom = 14.0
 
 [node name="Char Box 3" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.53
-anchor_top = 0.65
+anchor_top = 0.7
 anchor_right = 0.67
-anchor_bottom = 0.85
+anchor_bottom = 0.9
 margin_right = -2.0
 margin_bottom = 14.0
 
 [node name="Char Box 4" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.73
-anchor_top = 0.65
+anchor_top = 0.7
 anchor_right = 0.87
-anchor_bottom = 0.85
+anchor_bottom = 0.9
 margin_right = -2.0
 margin_bottom = 14.0
 
@@ -82,9 +82,9 @@ bbcode_text = "[center]1min 20s"
 text = "1min 20s"
 
 [node name="Middle Text" type="RichTextLabel" parent="."]
-anchor_top = 0.5
+anchor_top = 0.475
 anchor_right = 1.0
-anchor_bottom = 0.62
+anchor_bottom = 0.675
 custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
 bbcode_text = "[center]"

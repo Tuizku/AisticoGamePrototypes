@@ -11,7 +11,6 @@ func _ready():
 		boxes.append(get_child(i))
 		boxTexts.append(boxes[i].get_child(0).get_child(0))
 		originalPoses.append(boxes[i].rect_position)
-		#boxTexts[i].bbcode = true
 		boxTexts[i].bbcode_enabled = true
 
 func changeText(_richtext, _str):
@@ -42,25 +41,20 @@ func create_char_boxes(_count):
 		# Set Anchors		
 		box.anchor_left = boxSize * i + boxSize * 0.5 * (i + 1)
 		box.anchor_right = box.anchor_left + boxSize
-		box.anchor_top = 0.25
+		box.anchor_top = 0.225
 		box.anchor_bottom = box.anchor_top + boxSize
 		# Fixes stuff with the text centering (NOT FINISHED)
 		box.margin_right = 0
 		box.margin_bottom = box.rect_size.x / 2
 
-#func change_box_color(i):
-	#var string = boxTexts[i].bbcode_text[len(boxTexts[i].bbcode_text) - 1]
-	#var string = 
-	
 
 
 func _on_Control_chrs_created(_chrs):
 	for i in len(boxTexts):
 		changeText(boxTexts[i], _chrs[i])
-		if _chrs[i] in letterRarity[0]: boxes[i].modulate = Color.white
-		elif _chrs[i] in letterRarity[1]: boxes[i].modulate = Color.hotpink
-		elif _chrs[i] in letterRarity[2]: boxes[i].modulate = Color.yellow
-		#change_box_color(i)
+		#if _chrs[i] in letterRarity[0]: boxes[i].modulate = Color.white
+		#elif _chrs[i] in letterRarity[1]: boxes[i].modulate = Color.hotpink
+		#elif _chrs[i] in letterRarity[2]: boxes[i].modulate = Color.yellow
 
 
 func _on_Control_char_box_selected(_box_index):
@@ -88,5 +82,5 @@ func _on_Control_editing_char_selected(_index):
 
 func _on_Control_word_created(_word_start):
 	create_char_boxes(len(_word_start))
-	for i in len(_word_start):		
+	for i in len(_word_start):
 		changeText(boxTexts[i], _word_start[i])

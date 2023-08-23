@@ -1,0 +1,29 @@
+func pc_inputs(delta_param : float):
+	# Hand goes down
+	if not Input.is_key_pressed(KEY_SPACE) and handPos != -1:
+		handPos = -1
+		emit_signal("char_box_selected", int(handPos)) # Send signal to boxes
+	
+	# Hand comes up
+	if Input.is_key_pressed(KEY_SPACE) and handPos == -1:
+		handPos = 0
+		emit_signal("char_box_selected", int(handPos)) # Send signal to boxes
+	
+	# Change Hand Pos and send signal
+	if handPos != -1 and handPos < 3 and Input.is_action_just_pressed("ui_up"):
+		handPos += 1
+		boxSelectedTime = 0 # Reset Selected Timer
+		emit_signal("char_box_selected", int(handPos)) # Send signal to boxes
+	if handPos != -1 and handPos > 0 and Input.is_action_just_pressed("ui_down"):
+		handPos -= 1
+		boxSelectedTime = 0 # Reset Selected Timer
+		emit_signal("char_box_selected", int(handPos)) # Send signal to boxes
+	
+	# Select character (if 2s in the same place)
+	if Input.is_key_pressed(KEY_SPACE):
+		boxSelectedTime += delta_param
+	if boxSelectedTime >= 2:
+		emit_signal("char_chosen", chrs[handPos], editingCharIndex)
+		word[editingCharIndex] = chrs[handPos]
+		check_word()
+		boxSelectedTime = 0
