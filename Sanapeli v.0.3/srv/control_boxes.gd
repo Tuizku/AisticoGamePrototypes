@@ -1,5 +1,7 @@
 extends Control
 
+export var Type : String = ""
+
 var letterRarity : Array = ["aitneslo", "kuämvr", "jhypdögbfcwåqxz"]
 
 var boxes = []
@@ -26,8 +28,9 @@ func create_char_boxes(_count):
 	# Find the right size for boxes
 	var boxSize = 1
 	var sum = boxSize * _count + boxSize * 0.5 * (_count + 1)
-	boxSize = 1 / sum
-	print(boxSize)
+	boxSize = min(0.13, 1 / sum)
+	var boxGap = (1 - boxSize * _count) / (_count + 1)
+	#print(boxSize)
 	
 	var scene = load("res://srv/char_box.tscn")
 	for i in _count:
@@ -39,10 +42,11 @@ func create_char_boxes(_count):
 		boxTexts.append(boxText)
 		
 		# Set Anchors		
-		box.anchor_left = boxSize * i + boxSize * 0.5 * (i + 1)
+		box.anchor_left = boxSize * i + boxGap * (i + 1)
 		box.anchor_right = box.anchor_left + boxSize
-		box.anchor_top = 0.225
-		box.anchor_bottom = box.anchor_top + boxSize
+		box.anchor_bottom = 0.36
+		box.anchor_top = box.anchor_bottom - boxSize
+		
 		# Fixes stuff with the text centering (NOT FINISHED)
 		box.margin_right = 0
 		box.margin_bottom = box.rect_size.x / 2
@@ -84,3 +88,11 @@ func _on_Control_word_created(_word_start):
 	create_char_boxes(len(_word_start))
 	for i in len(_word_start):
 		changeText(boxTexts[i], _word_start[i])
+
+
+func _on_Control_hide_boxes(type):
+	if type == Type or type == "all": hide()
+
+
+func _on_Control_show_boxes(type):
+	if type == Type or type == "all": show()

@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Sanapeli v.0.2"
+config/name="Sanapeli v.0.3"
 run/main_scene="res://srv/game.tscn"
 config/icon="res://icon.png"
 

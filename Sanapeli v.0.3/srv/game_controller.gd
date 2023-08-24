@@ -3,23 +3,26 @@ extends Control
 # Exports
 export var GameTime : float = 30
 
-# Variables
-var middleText
-var letterRarity : Array = ["aitneslo", "kuämvr", "jhypdögbfcwåqxz"] # x, z not in og data
-var handPos : float = -1
-var boxSelectedTime : float = 0
-var editingCharIndex : int = 0
-var timeLeft : float = 0
-var difficulty : float = 1 # between 0 and 1 (1 is hardest)
+# Data and Nodes
+var wordsData
+var letterRarity : Array = ["aitneslo", "kuämvr", "jhypdögbfcwåqxz"]
+var middleText : RichTextLabel
 
+# Whole Game Variables
+var difficulty : float = 0.5 # between 0 and 1 (1 is hardest)
+var wordsPlayed : int = 0
+var points : Array
 
+# One Game Variables
+var selectedWord
 var word : String = ""
 var word_start_chrs : Array
 var chrs : Array
-
-# Chosen Word Settings
-var wordsData
-var selectedWord
+var editingWord = true
+var editingCharIndex : int = 0
+var handPos : float = -1
+var boxSelectedTime : float = 0
+var timeLeft : float = 0
 
 # Signals
 signal word_created(_hint)
@@ -28,9 +31,14 @@ signal char_box_selected(_box_index)
 signal editing_char_selected(_index)
 signal char_chosen(_char, _index)
 signal change_time(time)
+signal hide_boxes(type)
+signal show_boxes(type)
+
+#----------------------------------------------------------------------------#
 
 
-# Word Functions
+
+# Functions
 func load_words():
 	var file = File.new()
 	if not file.file_exists("res://data/words.json"):
@@ -38,6 +46,23 @@ func load_words():
 	file.open("res://data/words.json", File.READ)
 	var text = file.get_as_text()
 	wordsData = parse_json(text)
+func new_word():
+	select_word()
+	select_chrs()
+	emit_signal("word_created", word_start_chrs)
+	emit_signal("chrs_created", chrs)
+
+	# Setup word
+	word = ""
+	for i in len(word_start_chrs): 
+		if word_start_chrs[i] != "": word += word_start_chrs[i]
+		else: word += " "
+	check_word() # Finds the editingCharIndex
+	
+	# Hint
+	if wordsPlayed == 0:
+		middleText.bbcode_text = "[center]" + str(selectedWord["definition"])
+	wordsPlayed += 1
 func select_word():
 	# Word
 	var rng = RandomNumberGenerator.new()
@@ -67,10 +92,10 @@ func select_chrs():
 	
 	# Add random word start characters
 	var add_chars_amount = int((len(selectedWord["word"]) - 1) * (1 - difficulty))
-	print(add_chars_amount)
+	#print(add_chars_amount)
 	add_chars_amount -= funcs.chrs_in(word_start_chrs)
-	print(add_chars_amount)
-	print(word_start_chrs)
+	#print(add_chars_amount)
+	#print(word_start_chrs)
 	for i in add_chars_amount:
 		var loop = true
 		while loop:
@@ -88,21 +113,6 @@ func select_chrs():
 		var randomChr = char(rng.randi_range(ord("a"), ord("z")))
 		chrs.append(randomChr)
 	chrs.shuffle()
-func new_word():
-	select_word()
-	select_chrs()
-	emit_signal("word_created", word_start_chrs)
-	emit_signal("chrs_created", chrs)
-
-	# Setup word
-	word = ""
-	for i in len(word_start_chrs): 
-		if word_start_chrs[i] != "": word += word_start_chrs[i]
-		else: word += " "
-	check_word() # Finds the editingCharIndex
-	
-	# Hint
-	middleText.bbcode_text = "[center]" + str(selectedWord["definition"])
 func check_word():
 	# Checks the word, if it still has spaces, it selects a new editingCharIndex
 	# Else it will check if the word is included in words list
@@ -112,21 +122,36 @@ func check_word():
 			emit_signal("editing_char_selected", editingCharIndex)
 			return
 	# if word is filled, code gets here
-	emit_signal("editing_char_selected", -1)
+	editingCharIndex = -1
+	emit_signal("editing_char_selected", editingCharIndex)
+	add_points()
+	change_difficulty()
+	cutscene()
+	
+	#if word == selectedWord["word"]:
+		#show_text("Oikein!", Color.green)
+	#else: 
+		#show_text("Väärin!", Color.lightcoral)
+func add_points():
+	points.append(0)
 	if word == selectedWord["word"]:
-		#var points = 0
-		#for chrI in len(word):
-			#if word_start_chrs[chrI] == " ":
-				#if word[chrI] in letterRarity[0]: points += 5
-				#elif word[chrI] in letterRarity[1]: points += 10
-				#elif word[chrI] in letterRarity[2]: points += 25
-		#show_text(str(points) + " pistettä", Color.green)
-		show_text("Oikein!", Color.green)
-	else: show_text("Väärin!", Color.lightcoral)
+		var pointsIndex = len(points) - 1
+		for i in len(word):
+			if word_start_chrs[i] == "":
+				if word[i] in letterRarity[0]: points[pointsIndex] += 5
+				elif word[i] in letterRarity[1]: points[pointsIndex] += 10
+				elif word[i] in letterRarity[2]: points[pointsIndex] += 25
+func change_difficulty():
+	if word == selectedWord["word"]:
+		difficulty += 0.003 * timeLeft * len(word)
+	else: difficulty -= 0.35 - (len(word) - 4) * 0.05
+	difficulty = clamp(difficulty, 0, 1)
+	print("difficulty: ", difficulty)
+
 
 
 func _ready():
-	middleText = get_node("Middle Text") as RichTextLabel
+	middleText = get_node("Middle Text Container").get_node("Middle Text") as RichTextLabel
 	load_words()
 	new_word()
 	timeLeft = GameTime
@@ -136,15 +161,20 @@ func _physics_process(delta: float) -> void:
 	
 	timeLeft -= delta
 	emit_signal("change_time", 1 - timeLeft / GameTime)
+	
 	if (timeLeft <= 0):
+		if editingWord == true:
+			add_points()
+			change_difficulty()
+			cutscene()
 		timeLeft = GameTime
-		new_word()
 
 
 func pc_inputs(delta_param : float):
 	# Change Hand Position (resets boxSelectedTime and sends signal to boxes about handPos)
-	if handPos < 3 and Input.is_action_just_pressed("ui_up"):
-		handPos += 1
+	if Input.is_action_just_pressed("ui_up"):
+		if handPos < 3: handPos += 1
+		else: handPos = 0
 		boxSelectedTime = 0
 		emit_signal("char_box_selected", int(handPos))
 	
@@ -167,3 +197,30 @@ func show_text(text, color):
 	yield(get_tree().create_timer(5.0), "timeout")
 	middleText.bbcode_text = ""
 	middleText.modulate = Color.white
+
+func cutscene():
+	var time = max(0, timeLeft - 3)
+	editingWord = false
+	emit_signal("hide_boxes", "sel")
+	var correctWord : Array
+	#for i in len(selectedWord["word"]): correctWord.append(selectedWord["word"][i])
+	emit_signal("word_created", selectedWord["word"])
+	if points[len(points) - 1] != 0:
+		middleText.modulate = Color.green
+		middleText.bbcode_text = "[center]Hyvin löydetty!"
+	else:
+		middleText.modulate = Color.lightcoral
+		middleText.bbcode_text = "[center]Väärin!"
+	yield(get_tree().create_timer(3), "timeout")
+	
+	new_word()
+	var parent : BoxContainer = middleText.get_parent()
+	if time >= 1: parent.alignment = BoxContainer.ALIGN_BEGIN
+	middleText.modulate = Color.white
+	middleText.bbcode_text = "[center]" + selectedWord["definition"]
+	emit_signal("hide_boxes", "word")
+	yield(get_tree().create_timer(time), "timeout")
+	parent.alignment = BoxContainer.ALIGN_CENTER
+	
+	editingWord = true
+	emit_signal("show_boxes", "all")
