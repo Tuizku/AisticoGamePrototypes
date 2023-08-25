@@ -5,7 +5,7 @@
 [ext_resource path="res://srv/control_boxes.gd" type="Script" id=3]
 [ext_resource path="res://sprites/time slider.png" type="Texture" id=4]
 [ext_resource path="res://srv/time.gd" type="Script" id=5]
-[ext_resource path="res://srv/hint font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://fonts/hint font.tres" type="DynamicFont" id=6]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
