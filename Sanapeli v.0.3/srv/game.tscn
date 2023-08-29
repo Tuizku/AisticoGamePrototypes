@@ -12,6 +12,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.454902, 0.741176, 0.796078, 1 )
+
 [node name="Sel Char Boxes" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,33 +25,33 @@ Type = "sel"
 
 [node name="Char Box 1" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.13
-anchor_top = 0.7
+anchor_top = 0.64
 anchor_right = 0.27
-anchor_bottom = 0.9
+anchor_bottom = 0.84
 margin_right = -2.00002
 margin_bottom = 14.0
 
 [node name="Char Box 2" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.33
-anchor_top = 0.7
+anchor_top = 0.64
 anchor_right = 0.47
-anchor_bottom = 0.9
+anchor_bottom = 0.84
 margin_right = -2.0
 margin_bottom = 14.0
 
 [node name="Char Box 3" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.53
-anchor_top = 0.7
+anchor_top = 0.64
 anchor_right = 0.67
-anchor_bottom = 0.9
+anchor_bottom = 0.84
 margin_right = -2.0
 margin_bottom = 14.0
 
 [node name="Char Box 4" parent="Sel Char Boxes" instance=ExtResource( 1 )]
 anchor_left = 0.73
-anchor_top = 0.7
+anchor_top = 0.64
 anchor_right = 0.87
-anchor_bottom = 0.9
+anchor_bottom = 0.84
 margin_right = -2.0
 margin_bottom = 14.0
 
@@ -61,16 +66,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 5 )
 
-[node name="Background" type="TextureRect" parent="Time"]
-modulate = Color( 1, 0.694118, 0.694118, 1 )
-anchor_right = 1.0
-margin_bottom = 24.0
-texture = ExtResource( 4 )
-stretch_mode = 1
-
 [node name="Fill" type="TextureRect" parent="Time"]
-modulate = Color( 0.592157, 1, 0.556863, 1 )
-anchor_right = 1.0
+modulate = Color( 0.937255, 0.905882, 0.737255, 1 )
+anchor_top = 0.95
+anchor_bottom = 1.0
 texture = ExtResource( 4 )
 stretch_mode = 1
 
@@ -84,15 +83,17 @@ bbcode_text = "[center]1min 20s"
 text = "1min 20s"
 
 [node name="Middle Text Container" type="VBoxContainer" parent="."]
-anchor_top = 0.475
-anchor_right = 1.0
-anchor_bottom = 0.675
+anchor_left = 0.025
+anchor_top = 0.425
+anchor_right = 0.975
+anchor_bottom = 0.6
 alignment = 1
 
 [node name="Middle Text" type="RichTextLabel" parent="Middle Text Container"]
-margin_top = 27.0
-margin_right = 800.0
-margin_bottom = 69.0
+modulate = Color( 0.937255, 0.905882, 0.737255, 1 )
+margin_top = 21.0
+margin_right = 760.0
+margin_bottom = 63.0
 custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
 bbcode_text = "[center]"

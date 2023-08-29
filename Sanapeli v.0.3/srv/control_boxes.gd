@@ -4,14 +4,17 @@ export var Type : String = ""
 
 var letterRarity : Array = ["aitneslo", "kuämvr", "jhypdögbfcwåqxz"]
 
+
 var boxes = []
 var boxTexts = []
+var boxAnimators = []
 var originalPoses = []
 
 func _ready():
 	for i in get_child_count():
 		boxes.append(get_child(i))
-		boxTexts.append(boxes[i].get_child(0).get_child(0))
+		boxTexts.append(boxes[i].get_node("VBoxContainer").get_node("Text"))
+		boxAnimators.append(boxes[i].get_node("AnimationPlayer") as AnimationPlayer)
 		originalPoses.append(boxes[i].rect_position)
 		boxTexts[i].bbcode_enabled = true
 
@@ -36,15 +39,15 @@ func create_char_boxes(_count):
 	for i in _count:
 		# Create and Setup
 		var box = scene.instance()
-		var boxText = box.get_child(0).get_child(0)
+		var boxText = box.get_node("VBoxContainer").get_node("Text")
 		add_child(box)
 		boxes.append(box)
 		boxTexts.append(boxText)
 		
-		# Set Anchors		
+		# Set Anchors
 		box.anchor_left = boxSize * i + boxGap * (i + 1)
 		box.anchor_right = box.anchor_left + boxSize
-		box.anchor_bottom = 0.36
+		box.anchor_bottom = 0.3
 		box.anchor_top = box.anchor_bottom - boxSize
 		
 		# Fixes stuff with the text centering (NOT FINISHED)
@@ -62,15 +65,18 @@ func _on_Control_chrs_created(_chrs):
 
 
 func _on_Control_char_box_selected(_box_index):
-	for i in len(boxes):		
+	for i in len(boxes):
 		if _box_index == i:
-			originalPoses[i] = boxes[i].rect_position
-			boxes[i].rect_scale = Vector2(1.25, 1.25)
-			var _scale = boxes[i].rect_scale
-			boxes[i].rect_position -= Vector2(110 * (_scale.x - 1) / 2, 110 * (_scale.y - 1) / 2)
-		elif (boxes[i].rect_scale == Vector2(1.25, 1.25)):
-			boxes[i].rect_scale = Vector2(1, 1)
-			boxes[i].rect_position = originalPoses[i]
+			boxAnimators[i].play("Selecting")
+		elif boxAnimators[i].is_playing():
+			boxAnimators[i].stop(0)
+			#originalPoses[i] = boxes[i].rect_position
+			#boxes[i].rect_scale = Vector2(1.25, 1.25)
+			#var _scale = boxes[i].rect_scale
+			#boxes[i].rect_position -= Vector2(110 * (_scale.x - 1) / 2, 110 * (_scale.y - 1) / 2)
+		#elif (boxes[i].rect_scale == Vector2(1.25, 1.25)):
+			#boxes[i].rect_scale = Vector2(1, 1)
+			#boxes[i].rect_position = originalPoses[i]
 
 
 func _on_Control_char_chosen(_char, _index):
