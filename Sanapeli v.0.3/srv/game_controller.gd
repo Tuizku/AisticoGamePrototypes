@@ -34,6 +34,7 @@ signal char_chosen(_char, _index)
 signal change_time(time)
 signal hide_boxes(type)
 signal show_boxes(type)
+signal answer_animation(correct) # True or false?
 
 #----------------------------------------------------------------------------#
 
@@ -155,9 +156,11 @@ func cutscene():
 	if points[len(points) - 1] != 0:
 		#middleText.modulate = Color.green
 		middleText.bbcode_text = "[center]" + funcs.random_correct_sentence()
+		emit_signal("answer_animation", true)
 	else:
 		#middleText.modulate = Color.lightcoral
 		middleText.bbcode_text = "[center]" + funcs.random_wrong_sentence()
+		emit_signal("answer_animation", false)
 	yield(get_tree().create_timer(3), "timeout")
 	
 	

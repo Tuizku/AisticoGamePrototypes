@@ -1,0 +1,8 @@
+#if _box_index == i:
+	#originalPoses[i] = boxes[i].rect_position
+	#boxes[i].rect_scale = Vector2(1.25, 1.25)
+	#var _scale = boxes[i].rect_scale
+	#boxes[i].rect_position -= Vector2(110 * (_scale.x - 1) / 2, 110 * (_scale.y - 1) / 2)
+#elif (boxes[i].rect_scale == Vector2(1.25, 1.25)):
+	#boxes[i].rect_scale = Vector2(1, 1)
+	#boxes[i].rect_position = originalPoses[i]
