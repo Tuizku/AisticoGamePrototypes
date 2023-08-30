@@ -11,7 +11,7 @@ var rng : RandomNumberGenerator
 
 # Whole Game Variables
 var difficulty : float = 0.5 # between 0 and 1 (1 is hardest)
-var playingWordNum : int = 0
+var playingWordNum : int = 1
 var points : Array
 
 # One Game Variables
@@ -60,8 +60,6 @@ func new_word():
 		if word_start_chrs[i] != "": word += word_start_chrs[i]
 		else: word += " "
 	check_word() # Finds the editingCharIndex
-	
-	playingWordNum += 1
 func select_word():
 	# Selects a random word from data
 	var index
@@ -136,12 +134,7 @@ func check_word():
 	# If the word is filled, code gets here
 	editingCharIndex = -1
 	emit_signal("editing_char_selected", editingCharIndex)
-	
-	if playingWordNum >= 6:
-		add_points()
-		Global.Points = points
-		if get_tree().change_scene("res://srv/end.tscn") != OK: print("scene change failed")
-	else: cutscene()
+	cutscene()
 func cutscene():
 	# START OF CUTSCENE
 	
@@ -150,24 +143,30 @@ func cutscene():
 	editingWord = false
 	var time = max(0, timeLeft - 3)
 	
+	
 	# Show the correct word and if you were correct
 	emit_signal("hide_boxes", "sel")
 	emit_signal("word_created", selectedWord["word"])
 	if points[len(points) - 1] != 0:
-		#middleText.modulate = Color.green
 		middleText.bbcode_text = "[center]" + funcs.random_correct_sentence()
 		emit_signal("answer_animation", true)
 	else:
-		#middleText.modulate = Color.lightcoral
 		middleText.bbcode_text = "[center]" + funcs.random_wrong_sentence()
 		emit_signal("answer_animation", false)
 	yield(get_tree().create_timer(3), "timeout")
 	
 	
+	# Potential finish to game
+	print("playingwordnum: " + str(playingWordNum))
+	if playingWordNum >= 6:
+		Global.Points = points
+		yield(get_tree().create_timer(time), "timeout")
+		if get_tree().change_scene("res://srv/end.tscn") != OK: print("scene change failed")
+	
+	
 	
 	# MIDDLE OF CUTSCENE (new word and possibly an early hint)
 	var parent : BoxContainer = middleText.get_parent()
-	#middleText.modulate = Color.white
 	
 	# if early hint cutscene would take more than 1 seconds, display it
 	if time >= 1:
@@ -186,8 +185,8 @@ func cutscene():
 	
 	
 	# END OF CUTSCENE
-	#parent.alignment = BoxContainer.ALIGN_CENTER
 	editingWord = true
+	playingWordNum += 1
 	emit_signal("show_boxes", "all")
 func add_points():
 	points.append(0)
