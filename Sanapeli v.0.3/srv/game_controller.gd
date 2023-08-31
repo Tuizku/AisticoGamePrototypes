@@ -162,16 +162,15 @@ func cutscene():
 		Global.Points = points
 		yield(get_tree().create_timer(time), "timeout")
 		if get_tree().change_scene("res://srv/end.tscn") != OK: print("scene change failed")
+		return
 	
 	
 	
 	# MIDDLE OF CUTSCENE (new word and possibly an early hint)
-	var parent : BoxContainer = middleText.get_parent()
 	
 	# if early hint cutscene would take more than 1 seconds, display it
 	if time >= 1:
 		new_word()
-		#parent.alignment = BoxContainer.ALIGN_BEGIN
 		middleText.bbcode_text = "[center]" + selectedWord["definition"]
 		emit_signal("hide_boxes", "word")
 		yield(get_tree().create_timer(time), "timeout")
@@ -200,9 +199,9 @@ func add_points():
 		points[pointsIndex] += int(timeLeft / 2)
 		print(points[pointsIndex])
 func change_difficulty():
-	if word == selectedWord["word"]:
+	if word == selectedWord["word"]: # Word is correct
 		difficulty += 0.003 * timeLeft * len(word)
-	else: difficulty -= 0.35 - (len(word) - 4) * 0.05
+	else: difficulty -= 0.35 - (len(word) - 4) * 0.05 # Word is wrong
 	difficulty = clamp(difficulty, 0, 1)
 	print("difficulty: ", difficulty)
 
@@ -227,17 +226,13 @@ func _physics_process(delta: float) -> void:
 		handPos = -1
 		emit_signal("char_box_selected", int(handPos))
 	
+	# Change timeLeft and send signal to time slider for an update
 	timeLeft -= delta
 	emit_signal("change_time", 1 - timeLeft / GameTime)
 	
 	# Start a new word by calling cutscene
 	if (timeLeft <= 0):
-		
 		if editingWord == true:
-			if playingWordNum >= 6:
-				Global.Points = points
-				if get_tree().change_scene("res://srv/end.tscn") != OK: print("scene change failed")
-			
 			editingCharIndex = -1
 			emit_signal("editing_char_selected", editingCharIndex)
 			cutscene()
@@ -264,7 +259,4 @@ func pc_inputs(delta_param : float):
 		boxSelectedTime = 0
 		handPos = -1
 		emit_signal("char_box_selected", int(handPos))
-
-
-
 
