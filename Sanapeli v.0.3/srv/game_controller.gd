@@ -238,13 +238,17 @@ func _physics_process(delta: float) -> void:
 			cutscene()
 		timeLeft = GameTime
 
-
+var sensor_button_pressed_time : float = 0
 func pc_inputs(delta_param : float):
+	if Input.is_action_pressed("sensor button"): sensor_button_pressed_time += delta_param
+	else: sensor_button_pressed_time = 0
+	
 	# Change Hand Position (resets boxSelectedTime and sends signal to boxes about handPos)
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("sensor button") or sensor_button_pressed_time >= 1:
 		if handPos < 3: handPos += 1
 		else: handPos = 0
 		boxSelectedTime = 0
+		sensor_button_pressed_time = 0
 		emit_signal("char_box_selected", int(handPos))
 	
 	# When character is set, boxSelectedTime goes up by delta

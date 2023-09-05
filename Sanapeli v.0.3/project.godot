@@ -43,6 +43,14 @@ window/size/height=480
 
 common/drop_mouse_on_gui_input_disabled=true
 
+[input]
+
+"sensor button"={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+
 [physics]
 
 common/enable_pause_aware_picking=true
