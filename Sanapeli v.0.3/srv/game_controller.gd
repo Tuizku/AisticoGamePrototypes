@@ -200,7 +200,7 @@ func add_points():
 		print(points[pointsIndex])
 func change_difficulty():
 	if word == selectedWord["word"]: # Word is correct
-		difficulty += 0.003 * timeLeft * len(word)
+		difficulty += 0.1 + 0.0015 * timeLeft * len(word)
 	else: difficulty -= 0.35 - (len(word) - 4) * 0.05 # Word is wrong
 	difficulty = clamp(difficulty, 0, 1)
 	print("difficulty: ", difficulty)
@@ -233,15 +233,31 @@ func _physics_process(delta: float) -> void:
 	# Start a new word by calling cutscene
 	if (timeLeft <= 0):
 		if editingWord == true:
+			if editingCharIndex != -1:
+				emit_signal("char_chosen", chrs[handPos], editingCharIndex)
+				word[editingCharIndex] = chrs[handPos]
 			editingCharIndex = -1
 			emit_signal("editing_char_selected", editingCharIndex)
 			cutscene()
 		timeLeft = GameTime
 
+
 var sensor_button_pressed_time : float = 0
+var sensor_button_fix_time : float = 0
+var sensor_button_enabled : bool = false
 func pc_inputs(delta_param : float):
-	if Input.is_action_pressed("sensor button"): sensor_button_pressed_time += delta_param
+	# Allows the simplier input system -> hold hand to keep changing set char
+	if Input.is_action_pressed("sensor button"): 
+		sensor_button_pressed_time += delta_param
+		sensor_button_enabled = false
 	else: sensor_button_pressed_time = 0
+	
+	# Fixes the multi inputs. so the char can only be changed every 200ms
+	if not sensor_button_enabled: sensor_button_fix_time += delta_param
+	if sensor_button_fix_time > 0.2:
+		sensor_button_enabled = true
+		sensor_button_fix_time = 0
+	
 	
 	# Change Hand Position (resets boxSelectedTime and sends signal to boxes about handPos)
 	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("sensor button") or sensor_button_pressed_time >= 1:
@@ -264,3 +280,7 @@ func pc_inputs(delta_param : float):
 		handPos = -1
 		emit_signal("char_box_selected", int(handPos))
 
+
+
+func _on_Quit_Button_pressed():
+	get_tree().quit()
