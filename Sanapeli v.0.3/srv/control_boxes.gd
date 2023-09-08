@@ -108,11 +108,21 @@ func _on_Control_show_boxes(type):
 	if type == Type or type == "all": show()
 
 
-func _on_Control_answer_animation(correct):
-	if correct == true:
+
+func _on_Control_answer_animation(answer, cor_answer):
+	#for i in len(boxes): boxes[i].modulate = Color.white
+	
+	if answer == cor_answer:
 		for i in len(boxAnimators):
+			boxes[i].modulate = Color.white
 			boxAnimators[i].play("Jumping")
 			yield(get_tree().create_timer(0.2), "timeout")
 	else:
 		for i in len(boxAnimators):
+			boxes[i].modulate = Color.white
 			boxAnimators[i].play("Fall")
+			if answer[i] != cor_answer[i]: 
+				boxImages[i].texture = inverted_texture
+				boxTexts[i].modulate = Color("FFF6C9")
+				changeText(boxTexts[i], cor_answer[i])
+			yield(get_tree().create_timer(0.2), "timeout")

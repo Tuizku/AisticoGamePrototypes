@@ -10,7 +10,7 @@ var middleText : RichTextLabel
 var rng : RandomNumberGenerator
 
 # Whole Game Variables
-var difficulty : float = 0.5 # between 0 and 1 (1 is hardest)
+var difficulty : float = 0.3 # between 0 and 1 (1 is hardest)
 var playingWordNum : int = 1
 var points : Array
 
@@ -34,7 +34,7 @@ signal char_chosen(_char, _index)
 signal change_time(time)
 signal hide_boxes(type)
 signal show_boxes(type)
-signal answer_animation(correct) # True or false?
+signal answer_animation(answer, cor_answer) # True or false?
 
 #----------------------------------------------------------------------------#
 
@@ -93,7 +93,7 @@ func select_chrs():
 	
 	# Add Random Word Start Characters By Using Difficulty
 	
-	var add_chars_amount = int((len(selectedWord["word"]) - 1) * (1 - difficulty))
+	var add_chars_amount = int((len(selectedWord["word"]) - 1) * (1 - (difficulty * 0.65)))
 	add_chars_amount -= funcs.chrs_in(word_start_chrs)
 	for i in add_chars_amount:
 		while true: # loops until a character has been added to a random and empty space
@@ -141,19 +141,15 @@ func cutscene():
 	add_points()
 	change_difficulty()
 	editingWord = false
-	var time = max(0, timeLeft - 3)
+	var time = max(0, timeLeft - 4)
 	
 	
 	# Show the correct word and if you were correct
 	emit_signal("hide_boxes", "sel")
-	emit_signal("word_created", selectedWord["word"])
-	if points[len(points) - 1] != 0:
-		middleText.bbcode_text = "[center]" + funcs.random_correct_sentence()
-		emit_signal("answer_animation", true)
-	else:
-		middleText.bbcode_text = "[center]" + funcs.random_wrong_sentence()
-		emit_signal("answer_animation", false)
-	yield(get_tree().create_timer(3), "timeout")
+	emit_signal("answer_animation", word, selectedWord["word"])
+	if points[len(points) - 1] != 0: middleText.bbcode_text = "[center]" + funcs.random_correct_sentence()
+	else: middleText.bbcode_text = "[center]" + funcs.random_wrong_sentence()
+	yield(get_tree().create_timer(4), "timeout")
 	
 	
 	# Potential finish to game
@@ -200,8 +196,8 @@ func add_points():
 		print(points[pointsIndex])
 func change_difficulty():
 	if word == selectedWord["word"]: # Word is correct
-		difficulty += 0.1 + 0.0015 * timeLeft * len(word)
-	else: difficulty -= 0.35 - (len(word) - 4) * 0.05 # Word is wrong
+		difficulty += 0.1 + 0.001 * timeLeft * len(word)
+	else: difficulty -= 0.3 - (len(word) - 4) * 0.05 # Word is wrong
 	difficulty = clamp(difficulty, 0, 1)
 	print("difficulty: ", difficulty)
 
