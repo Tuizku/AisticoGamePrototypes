@@ -13,5 +13,5 @@ func _physics_process(_delta):
 
 func _on_Player_body_entered(body):
 	if visible and body.is_in_group("item"):
-		print(body.Score)
+		get_parent().change_points(body.Score)
 		body.queue_free()
