@@ -1,19 +1,18 @@
 extends Node2D
 
 # Exports
-export var SpawnTime : float = 5
-export var ItemSpeed : float = 200
-export (float, 0, 1) var DifficultyIncreasePercentage = 0.1
+export var StartSpawnTime : float = 5
+export var StartItemSpeed : float = 200
 
 # Variables
+var wave = 0
+var combo = 0
 var points = 0
-var itemScene
-var pointsText : RichTextLabel
+var itemScene = load("res://scenes/item.tscn")
+onready var pointsText : RichTextLabel = get_node("PointsText")
 
 func _ready():
 	randomize()
-	itemScene = load("res://scenes/item.tscn")
-	pointsText = get_node("PointsText")
 	
 	# Adjust players
 	var screenSizeX = get_viewport_rect().size.x
@@ -21,37 +20,39 @@ func _ready():
 	get_node("Player2").position.x = screenSizeX / 6 * 3
 	get_node("Player3").position.x = screenSizeX / 6 * 5
 	
+	yield(get_tree().create_timer(4), "timeout")
 	waves()
 
-func _process(_delta):
-	# Spawn items when the SpawnTime has elapsed. SpawnTime decreases over time and ItemSpeed increases
-	"""currentSpawnTime -= delta
-	if currentSpawnTime <= 0:
-		spawn_items()
-		SpawnTime -= SpawnTime * DifficultyIncreasePercentage
-		currentSpawnTime = SpawnTime
-		ItemSpeed += ItemSpeed * DifficultyIncreasePercentage"""
+func _physics_process(_delta):
+	print("wave: " + str(wave) + " | combo: " + str(combo))
 
 
 
 func waves():
 	while true:
 		var screenSizeX = get_viewport_rect().size.x
+		var spawnTime
+		var speed
+		
+		# Spawn items 5 times in ONE wave
 		for itemGroupIndex in 5:
-			yield(get_tree().create_timer(SpawnTime + rand_range(-0.5, 0.5)), "timeout")
-			
 			var itemPositions = get_random_item_positions(1 + randi() % 3)
+			spawnTime = (StartSpawnTime - 0.2 * wave) - (1 / 15) * combo
+			speed = (StartItemSpeed + 15 * wave) + 5 * combo
+			
 			for itemIndex in len(itemPositions):
 				var instance = itemScene.instance()
-				instance.Speed = ItemSpeed
+				instance.Speed = speed
 				instance.position = Vector2(screenSizeX / 6 * (1 + itemPositions[itemIndex] * 2), -50)
 				instance.create_item(randi() % 2 == 1)
 				add_child(instance)
+			
+			yield(get_tree().create_timer(spawnTime), "timeout")
 		
 		# Wave Break Time
 		yield(get_tree().create_timer(7), "timeout")
-		SpawnTime -= SpawnTime * DifficultyIncreasePercentage
-		ItemSpeed += ItemSpeed * DifficultyIncreasePercentage
+		wave += 1
+
 
 func get_random_item_positions(amount):
 	# If amount is 1, select a random position. If 2-3, then select a possible
@@ -66,6 +67,16 @@ func get_random_item_positions(amount):
 			if i != notIncluded: result.append(i)
 	return result
 
+
 func change_points(amount):
 	points += amount
+	if points < 0: points = 0
 	pointsText.bbcode_text = "[center]" + str(points)
+
+func inc_combo():
+	combo += 1
+	# some visuals later here
+
+func lose_combo():
+	combo = 0
+	# some visuals later here
