@@ -4,7 +4,7 @@
 [ext_resource path="res://sprites/background.png" type="Texture" id=2]
 [ext_resource path="res://scripts/game_controller.gd" type="Script" id=3]
 [ext_resource path="res://fonts/font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://sprites/ui_box.png" type="Texture" id=5]
+[ext_resource path="res://fonts/big_font.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scripts/take_whole_screen.gd" type="Script" id=6]
 [ext_resource path="res://scenes/ui_box.tscn" type="PackedScene" id=7]
 
@@ -57,69 +57,28 @@ margin_bottom = 1080.0
 script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
-visible = false
-anchor_left = 0.3
+anchor_left = 0.275
 anchor_top = 0.02
-anchor_right = 0.7
+anchor_right = 0.725
 anchor_bottom = 0.12
-alignment = 1
-
-[node name="ComboMultiplier" type="TextureRect" parent="UI/HBoxContainer"]
-visible = false
-margin_right = 382.0
-margin_bottom = 107.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 5 )
-expand = true
-
-[node name="Label" type="Label" parent="UI/HBoxContainer/ComboMultiplier"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "hello yes"
-valign = 1
-autowrap = true
-
-[node name="Points" type="TextureRect" parent="UI/HBoxContainer"]
-visible = false
-margin_right = 684.0
-margin_bottom = 107.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 5 )
-expand = true
-
-[node name="Label" type="Label" parent="UI/HBoxContainer/Points"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "hello yes"
-valign = 1
-autowrap = true
-
-[node name="NinePatchRect" parent="UI/HBoxContainer" instance=ExtResource( 7 )]
-margin_left = 344.0
-margin_right = 424.0
-margin_bottom = 107.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI"]
-anchor_left = 0.3
-anchor_top = 0.02
-anchor_right = 0.7
-anchor_bottom = 0.12
-custom_constants/separation = 100
+custom_constants/separation = 300
 alignment = 1
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Box" parent="UI/HBoxContainer2" instance=ExtResource( 7 )]
-margin_left = 78.0
-margin_right = 334.0
+[node name="MultiplierBox" parent="UI/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 26.0
+margin_right = 282.0
 
-[node name="Box2" parent="UI/HBoxContainer2" instance=ExtResource( 7 )]
-margin_left = 434.0
-margin_right = 690.0
+[node name="PointsBox" parent="UI/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 582.0
+margin_right = 838.0
+
+[node name="WaveText" type="Label" parent="UI"]
+anchor_top = 0.4
+anchor_right = 1.0
+anchor_bottom = 0.6
+custom_fonts/font = ExtResource( 5 )
+align = 1
+valign = 1

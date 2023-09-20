@@ -16,5 +16,5 @@ func _on_Player_body_entered(body):
 	if visible and body.is_in_group("item"):
 		if body.Score > 0: gameController.inc_combo()
 		else: gameController.lose_combo()
-		gameController.change_points(body.Score)
+		gameController.change_points(body.Score, PlayerIndex)
 		body.queue_free()

@@ -3,8 +3,18 @@ extends RigidBody2D
 export var Speed : int = 75
 export var Score = 0
 
-var good_item_texture = load("res://sprites/check.png")
-var bad_item_texture = load("res://sprites/x.png")
+var items = [
+	{
+		"friendly" : true,
+		"texture" : load("res://sprites/check.png"),
+		"score" : 2
+	},
+	{
+		"friendly" : true,
+		"texture" : load("res://sprites/x.png"),
+		"score" : -4
+	}
+]
 
 
 func _ready():
@@ -15,9 +25,10 @@ func _on_Item_body_entered(_body):
 	queue_free()
 
 func create_item(friendly):
-	if friendly:
-		get_node("Sprite").texture = good_item_texture
-		Score = 2
-	else:
-		get_node("Sprite").texture = bad_item_texture
-		Score = -2
+	# Finds possible item choices by a friendly bool and selects one of them, then it setups the item
+	var possibleChoices = []
+	for i in len(items):
+		if items[i]["friendly"] == friendly: possibleChoices.append(items[i])
+	var choice = items[randi() % len(items)]
+	get_node("Sprite").texture = choice["texture"]
+	Score = choice["score"]

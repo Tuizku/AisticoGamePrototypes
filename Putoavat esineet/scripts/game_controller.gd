@@ -5,14 +5,21 @@ export var StartSpawnTime : float = 5
 export var StartItemSpeed : float = 200
 
 # Variables
-var wave = 0
+var wave = 1
 var combo = 0
+var comboMultiplier : int = 1
 var points = 0
 var itemScene = load("res://scenes/item.tscn")
-onready var pointsText : RichTextLabel = get_node("PointsText")
+var floatingLabelScene = load("res://scenes/floating_label.tscn")
+onready var pointsText : Label = get_node("UI/HBoxContainer/PointsBox/Label")
+onready var comboText : Label = get_node("UI/HBoxContainer/MultiplierBox/Label")
+onready var waveText : Label = get_node("UI/WaveText")
 
 func _ready():
 	randomize()
+	
+	#for i in 20:
+		#print(str(i + 1) + " " + str((i + 1) / 5))
 	
 	# Adjust players
 	var screenSizeX = get_viewport_rect().size.x
@@ -20,16 +27,22 @@ func _ready():
 	get_node("Player2").position.x = screenSizeX / 6 * 3
 	get_node("Player3").position.x = screenSizeX / 6 * 5
 	
+	pointsText.text = "0"
+	comboText.text = "x1"
+	
+	waveText.text = "Wave 1"
 	yield(get_tree().create_timer(4), "timeout")
+	waveText.text = ""
 	waves()
 
 func _physics_process(_delta):
-	print("wave: " + str(wave) + " | combo: " + str(combo))
+	pass
+	#print("wave: " + str(wave) + " | combo: " + str(combo))
 
 
 
 func waves():
-	while true:
+	for i in 10: # Run 10 waves
 		var screenSizeX = get_viewport_rect().size.x
 		var spawnTime
 		var speed
@@ -37,8 +50,10 @@ func waves():
 		# Spawn items 5 times in ONE wave
 		for itemGroupIndex in 5:
 			var itemPositions = get_random_item_positions(1 + randi() % 3)
-			spawnTime = (StartSpawnTime - 0.2 * wave) - (1 / 15) * combo
-			speed = (StartItemSpeed + 15 * wave) + 5 * combo
+			spawnTime = (StartSpawnTime - 0.2 * wave)
+			spawnTime -= spawnTime * 0.1 * comboMultiplier
+			spawnTime -= rand_range(0, spawnTime * 0.5)
+			speed = (StartItemSpeed + 15 * wave) + 40 * comboMultiplier
 			
 			for itemIndex in len(itemPositions):
 				var instance = itemScene.instance()
@@ -47,11 +62,15 @@ func waves():
 				instance.create_item(randi() % 2 == 1)
 				add_child(instance)
 			
+			print(str(spawnTime) + " " + str(rand_range(0, 1)))
 			yield(get_tree().create_timer(spawnTime), "timeout")
 		
 		# Wave Break Time
-		yield(get_tree().create_timer(7), "timeout")
 		wave += 1
+		yield(get_tree().create_timer(4), "timeout")
+		if wave <= 10: waveText.text = "Wave " + str(wave)
+		yield(get_tree().create_timer(3), "timeout")
+		waveText.text = ""
 
 
 func get_random_item_positions(amount):
@@ -68,15 +87,27 @@ func get_random_item_positions(amount):
 	return result
 
 
-func change_points(amount):
-	points += amount
+func change_points(amount, player_index):
+	if amount > 0: points += amount * comboMultiplier
+	else: points += amount
 	if points < 0: points = 0
-	pointsText.bbcode_text = "[center]" + str(points)
+	pointsText.text = str(points)
+	
+	# Floating Label Effect
+	var screen = get_viewport_rect().size
+	var instance : Label = floatingLabelScene.instance()
+	instance.rect_position = Vector2(screen.x / 6 * (1 + player_index * 2), screen.y * 0.75)
+	instance.rect_position.x -= instance.rect_size.x * 0.5
+	add_child(instance)
+	instance.start(amount, comboMultiplier)
 
 func inc_combo():
 	combo += 1
-	# some visuals later here
+	comboMultiplier = 1 + combo / 5
+	if comboMultiplier > 5: comboMultiplier = 5
+	comboText.text = "x" + str(comboMultiplier)
 
 func lose_combo():
 	combo = 0
-	# some visuals later here
+	comboMultiplier = 1
+	comboText.text = "x1"

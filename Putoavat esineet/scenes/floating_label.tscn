@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/floating_label.gd" type="Script" id=1]
+[ext_resource path="res://fonts/font.tres" type="DynamicFont" id=2]
+
+[node name="Label" type="Label"]
+margin_right = 150.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 2 )
+text = "?x?"
+align = 1
+valign = 1
+script = ExtResource( 1 )
