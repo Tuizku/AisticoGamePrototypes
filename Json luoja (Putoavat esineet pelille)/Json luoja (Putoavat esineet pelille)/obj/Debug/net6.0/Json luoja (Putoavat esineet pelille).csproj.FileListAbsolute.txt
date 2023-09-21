@@ -1,0 +1,17 @@
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\bin\Debug\net6.0\Json luoja (Putoavat esineet pelille).exe
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\bin\Debug\net6.0\Json luoja (Putoavat esineet pelille).deps.json
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\bin\Debug\net6.0\Json luoja (Putoavat esineet pelille).runtimeconfig.json
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\bin\Debug\net6.0\Json luoja (Putoavat esineet pelille).dll
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\bin\Debug\net6.0\Json luoja (Putoavat esineet pelille).pdb
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\Json luoja (Putoavat esineet pelille).csproj.AssemblyReference.cache
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\Json luoja (Putoavat esineet pelille).GeneratedMSBuildEditorConfig.editorconfig
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\Json luoja (Putoavat esineet pelille).AssemblyInfoInputs.cache
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\Json luoja (Putoavat esineet pelille).AssemblyInfo.cs
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\Json luoja (Putoavat esineet pelille).csproj.CoreCompileInputs.cache
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\Json luoja (Putoavat esineet pelille).csproj.CopyComplete
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\Json luoja (Putoavat esineet pelille).dll
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\refint\Json luoja (Putoavat esineet pelille).dll
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\Json luoja (Putoavat esineet pelille).pdb
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\Json luoja (Putoavat esineet pelille).genruntimeconfig.cache
+D:\Coding Projects\Aistico Godot\AisticoGamePrototypes\Json luoja (Putoavat esineet pelille)\Json luoja (Putoavat esineet pelille)\obj\Debug\net6.0\ref\Json luoja (Putoavat esineet pelille).dll

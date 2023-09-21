@@ -1,0 +1,14 @@
+[
+  [
+    {
+      "friendly": true,
+      "texture": "res://sprites/check.png",
+      "score": 2
+    },
+    {
+      "friendly": false,
+      "texture": "res://sprites/x.png",
+      "score": -4
+    }
+  ]
+]

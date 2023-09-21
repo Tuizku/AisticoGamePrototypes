@@ -8,7 +8,6 @@ func _physics_process(_delta):
 
 
 func start(item_score, multiplier):
-	print("here")
 	if item_score > 0: 
 		#modulate = Color.limegreen
 		text = str(item_score) + "x" + str(multiplier)

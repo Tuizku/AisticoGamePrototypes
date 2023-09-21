@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "TB/gThck8DagsVqiRcF1lOhSX/Y6dXqN0YjXMJ8ROtLKloNeKvwF22O0lQfZqA/wVLlHH/p8j0Dn8MKnBqLEzA==",
+  "success": true,
+  "projectFilePath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille).csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Tuisku\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

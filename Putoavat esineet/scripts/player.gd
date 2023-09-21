@@ -4,6 +4,9 @@ export var PlayerIndex : int = 0
 var keys = ["ui_left", "ui_down", "ui_right"]
 onready var gameController = get_parent()
 
+func _ready():
+	position.x = get_viewport_rect().size.x / 6 * (1 + 2 * PlayerIndex)
+
 func _physics_process(_delta):
 	if Input.is_action_just_pressed(keys[PlayerIndex]):
 		if visible:
