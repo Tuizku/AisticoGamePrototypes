@@ -2,13 +2,15 @@
   [
     {
       "friendly": true,
+      "score": 2,
       "texture": "res://sprites/check.png",
-      "score": 2
+      "source": ""
     },
     {
       "friendly": false,
+      "score": -4,
       "texture": "res://sprites/x.png",
-      "score": -4
+      "source": ""
     }
   ]
 ]

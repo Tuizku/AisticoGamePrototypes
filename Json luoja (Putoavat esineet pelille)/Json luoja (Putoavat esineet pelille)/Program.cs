@@ -2,7 +2,7 @@
 
 string Input(string text)
 {
-    Console.Write(text + " (text): ");
+    Console.Write(text + ": ");
     string? result = Console.ReadLine();
     if (result != null) return result;
     else return "";
@@ -25,11 +25,20 @@ bool InputBool(string text)
 }
 
 
-string dataPath = "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Putoavat esineet\\data\\itemrows_data.json";
+string PCdataPath = "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Putoavat esineet\\data\\itemrows_data.json";
+string LaptopDataPath = "D:\\Files\\Git\\AisticoGamePrototypes\\Putoavat esineet\\data\\itemrows_data.json";
+string dataPath = "";
 string textureDirectoryPath = "res://sprites/";
 string texturePathExtension = ".png";
 
 List<List<Item>> data = new();
+
+// Select dataPath
+string pathCommand = Input("select dataPath (pc/laptop/custom)");
+if (pathCommand == "pc") dataPath = PCdataPath;
+else if (pathCommand == "laptop") dataPath = LaptopDataPath;
+else if (pathCommand == "custom") dataPath = Input("path");
+Console.WriteLine("");
 
 
 bool keepAddingRows = true;
@@ -44,8 +53,9 @@ while (keepAddingRows)
     {
         Console.WriteLine($"Item {i}");
         bool friendly = InputBool("friendly");
-        string texture = textureDirectoryPath + Input("texture name without extension") + texturePathExtension;
         int score = InputInt("score");
+        string texture = textureDirectoryPath + Input("texture name without extension") + texturePathExtension;
+        string source = Input("source");
         Item item = new();
         item.friendly = friendly; item.texture = texture; item.score = score;
         row.Add(item);

@@ -1,0 +1,36 @@
+# Run WaveCount amount of waves
+	for i in WaveCount: 
+		var screenSizeX = get_viewport_rect().size.x
+		var spawnTime
+		var speed
+		
+		# Spawn items 5 times in ONE wave
+		for itemGroupIndex in 5:
+			# Select 1-3 item positions randomly, then adjust spawnTime and speed of items
+			var itemPositions = get_random_item_positions(1 + randi() % 3)
+			spawnTime = (StartSpawnTime - 0.2 * wave)
+			spawnTime -= spawnTime * 0.1 * comboMultiplier
+			spawnTime -= rand_range(0, spawnTime * 0.5)
+			speed = (StartItemSpeed + 15 * wave) + 40 * comboMultiplier
+			
+			# Spawn the row of items
+			for itemIndex in len(itemPositions):
+				var instance = itemScene.instance()
+				instance.Speed = speed
+				instance.position = Vector2(screenSizeX / 6 * (1 + itemPositions[itemIndex] * 2), -50)
+				instance.create_item(randi() % 2 == 1)
+				add_child(instance)
+			
+			# Wait for spawnTime
+			yield(get_tree().create_timer(spawnTime), "timeout")
+		
+		# Wave Break Time (Timeouts and show next wave text)
+		wave += 1
+		yield(get_tree().create_timer(4), "timeout")
+		if wave <= WaveCount: waveText.text = "Wave " + str(wave)
+		yield(get_tree().create_timer(3), "timeout")
+		waveText.text = ""
+	
+	# Game ended, save score and go to the end scene
+	datamanager.add_int_to_save_var(score, "placements")
+	var _sceneInstance = get_tree().change_scene("res://scenes/end.tscn")

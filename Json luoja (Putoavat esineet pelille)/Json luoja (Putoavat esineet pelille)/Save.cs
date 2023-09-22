@@ -62,6 +62,7 @@ public class Save
 public class Item
 {
     public bool friendly = false;
-    public string texture = "";
     public int score = 0;
+    public string texture = "";
+    public string source = "";
 }

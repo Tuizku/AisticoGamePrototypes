@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille).csproj": {}
+    "D:\\Files\\Git\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille).csproj": {}
   },
   "projects": {
-    "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille).csproj": {
+    "D:\\Files\\Git\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille).csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille).csproj",
+        "projectUniqueName": "D:\\Files\\Git\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille).csproj",
         "projectName": "Json luoja (Putoavat esineet pelille)",
-        "projectPath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille).csproj",
-        "packagesPath": "C:\\Users\\Tuisku\\.nuget\\packages\\",
-        "outputPath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\obj\\",
+        "projectPath": "D:\\Files\\Git\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille).csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Files\\Git\\AisticoGamePrototypes\\Json luoja (Putoavat esineet pelille)\\Json luoja (Putoavat esineet pelille)\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Tuisku\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
