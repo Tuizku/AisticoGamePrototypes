@@ -11,13 +11,18 @@ var itemRows
 # Exports
 export var StartSpawnTime : float = 5
 export var StartItemSpeed : float = 200
-export var LevelCount : int = 3
-export var RowsToSpawn : Array = [3, 10] # Rows to spawn in slow and fast mode
+export var LevelAmount : int = 3
+export var SelectRowsAmount : int = 3
+#export var RowsToSpawn : Array = [3, 10] # Rows to spawn in slow and fast mode
 
 # Variables
-var STATE = 1
+var selectedRows
+var STATE = 0
 var time : float = 0
 var rowsGenerated = 0
+
+var learningRowsLeft : Array = []
+var lastLearningRow
 
 var score = 0
 var combo = 0
@@ -66,9 +71,24 @@ func lose_combo():
 	comboMultiplier = 1
 	comboText.text = "x1"
 
+var callsByRow = 0
+var callItemsAreCorrect = true
+func was_row_learned(_score, _row_data):
+	# This gets called by the collected and freed items. When all rows items have called here,
+	# the row gets either erased from learningRowsLeft or nothing happens to it
+	if len(learningRowsLeft) == 0: return
+	
+	callsByRow += 1
+	if _score < 0: callItemsAreCorrect = false
+	
+	if callsByRow >= len(_row_data): # If all items have called here
+		if callItemsAreCorrect == true: learningRowsLeft.erase(_row_data)
+		callsByRow = 0
+		callItemsAreCorrect = true
+
 func control_state(input):
 	if input == "next": STATE += 1
-	elif input == "reset": STATE = 1
+	elif input == "reset": STATE = 0
 	time = 0
 
 #---------------------------Controlling-Functions-------------------------------#
@@ -90,14 +110,25 @@ func _ready():
 func _process(delta):
 	time += delta
 	
-	if STATE == 1: show_text("Nyt harkiten!") # Nopea: Nyt Tarkkana!
-	elif STATE == 2: do_item_spawning(RowsToSpawn[0])
+	if STATE == 0:
+		# Select new rows to be played
+		selectedRows = []
+		var rows : Array = itemRows
+		rows.shuffle()
+		for i in range(SelectRowsAmount):
+			selectedRows.append(rows[i])
+		
+		# Setup the learning part
+		learningRowsLeft = selectedRows.duplicate()
+		
+		control_state("next")
+	if STATE == 1: show_text("Nyt harkiten!")
+	elif STATE == 2: learn_item_spawning()
 	elif STATE == 3: show_text("answers should be here...")
 	elif STATE == 4: show_text("Nyt tarkkana!")
-	elif STATE == 5: do_item_spawning(RowsToSpawn[1])
+	elif STATE == 5: fast_item_spawning(10)
 	elif STATE == 6: show_text("Hyvä hyvä!")
 	elif STATE == 7: control_state("reset")
-	
 
 
 func show_text(text):
@@ -107,9 +138,34 @@ func show_text(text):
 		control_state("next")
 
 
-
-func do_item_spawning(spawn_rows_amount):
+func learn_item_spawning():
 	var speed = 200
+	var spawnTime = 7
+	
+	# Spawn a row of items when spawnTime amount elapsed after last row spawning
+	if time >= rowsGenerated * spawnTime:
+		# If all rows have been learned, go to next state
+		if len(learningRowsLeft) == 0:
+			rowsGenerated = 0
+			control_state("next")
+			return
+		
+		var selectedRow = learningRowsLeft[randi() % len(learningRowsLeft)]
+		var itemPositions = get_random_item_positions(len(selectedRow))
+		
+		# Spawn the items
+		for itemIndex in len(selectedRow):
+			var itemData = selectedRow[itemIndex]
+			var instance = itemScene.instance()
+			instance.Speed = speed
+			instance.position = Vector2(itemPositions[itemIndex], -50)
+			instance.create_item(itemData, selectedRow)
+			add_child(instance)
+		rowsGenerated += 1
+
+
+func fast_item_spawning(spawn_rows_amount):
+	var speed = 250
 	var spawnTime = 5
 	
 	print(str(time) + "  " + str(rowsGenerated * spawnTime))
@@ -121,7 +177,7 @@ func do_item_spawning(spawn_rows_amount):
 			control_state("next")
 			return
 		
-		var selectedRow = itemRows[randi() % len(itemRows)]
+		var selectedRow = selectedRows[randi() % len(selectedRows)]
 		var itemPositions = get_random_item_positions(len(selectedRow))
 		
 		# Spawn the items
@@ -130,7 +186,7 @@ func do_item_spawning(spawn_rows_amount):
 			var instance = itemScene.instance()
 			instance.Speed = speed
 			instance.position = Vector2(itemPositions[itemIndex], -50)
-			instance.create_item(item_data)
+			instance.create_item(item_data, selectedRow)
 			add_child(instance)
 			
 		rowsGenerated += 1

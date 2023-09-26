@@ -20,4 +20,5 @@ func _on_Player_body_entered(body):
 		if body.Score > 0: gameController.inc_combo()
 		else: gameController.lose_combo()
 		gameController.change_points(body.Score, PlayerIndex)
+		gameController.was_row_learned(body.Score, body.rowData)
 		body.queue_free()

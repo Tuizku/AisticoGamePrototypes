@@ -1,0 +1,64 @@
+[
+  [
+    {
+      "friendly": true,
+      "score": 2,
+      "texture": "res://sprites/items/car.png",
+      "source": "<a href=\"https://www.freepik.com/free-vector/set-transportation-vehicle_4453029.htm#query=everyday%20objects%20car&position=4&from_view=search&track=ais\">Image by brgfx</a> on Freepik"
+    },
+    {
+      "friendly": false,
+      "score": -2,
+      "texture": "res://sprites/items/airplane.png",
+      "source": "<a href=\"https://www.freepik.com/free-vector/sticker-set-mixed-daily-objects_27286523.htm#query=everyday%20objects&position=16&from_view=keyword&track=ais\">Image by brgfx</a> on Freepik"
+    }
+  ],
+  [
+    {
+      "friendly": true,
+      "score": 2,
+      "texture": "res://sprites/items/bus.png",
+      "source": "<a href=\"https://www.freepik.com/free-vector/set-transportation-vehicle_4453029.htm#query=everyday%20objects%20car&position=4&from_view=search&track=ais\">Image by brgfx</a> on Freepik"
+    },
+    {
+      "friendly": false,
+      "score": -2,
+      "texture": "res://sprites/items/car.png",
+      "source": "<a href=\"https://www.freepik.com/free-vector/set-transportation-vehicle_4453029.htm#query=everyday%20objects%20car&position=4&from_view=search&track=ais\">Image by brgfx</a> on Freepik"
+    }
+  ],
+  [
+    {
+      "friendly": true,
+      "score": 2,
+      "texture": "res://sprites/items/walking.png",
+      "source": "<a href=\"https://www.freepik.com/free-vector/faceless-children-walking-white-background_1169220.htm#query=walking%20cartoonish&position=8&from_view=search&track=ais\">Image by brgfx</a> on Freepik"
+    },
+    {
+      "friendly": true,
+      "score": 2,
+      "texture": "res://sprites/items/cycle.png",
+      "source": "<a href=\"https://www.freepik.com/free-vector/cute-bicycles-different-colors-set-illustrations-eco-city-transport-kids-adults_20827606.htm#query=cycle%20cartoonish&position=1&from_view=search&track=ais\">Image by pch.vector</a> on Freepik"
+    },
+    {
+      "friendly": false,
+      "score": -2,
+      "texture": "res://sprites/items/motorcycle.png",
+      "source": "<a href=\"https://www.freepik.com/free-vector/illustration-motorcycle-red-color_6026996.htm#query=motorcycle%20cartoonish&position=21&from_view=search&track=ais\">Image by brgfx</a> on Freepik"
+    }
+  ],
+  [
+    {
+      "friendly": true,
+      "score": 2,
+      "texture": "res://sprites/items/tomato.png",
+      "source": "<a href=\"https://www.freepik.com/free-vector/set-different-foods_4546020.htm#query=food%20cartoonish&position=15&from_view=search&track=ais\">Image by brgfx</a> on Freepik"
+    },
+    {
+      "friendly": false,
+      "score": -2,
+      "texture": "res://sprites/items/steak.png",
+      "source": "<a href=\"https://www.freepik.com/free-vector/set-different-foods_4546020.htm#query=food%20cartoonish&position=15&from_view=search&track=ais\">Image by brgfx</a> on Freepik"
+    }
+  ]
+]
