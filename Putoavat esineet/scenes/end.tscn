@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://fonts/big_font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://sprites/background.png" type="Texture" id=3]
+[ext_resource path="res://sprites/background 2.png" type="Texture" id=2]
 [ext_resource path="res://scripts/end_controller.gd" type="Script" id=4]
 
 [node name="Control" type="Control"]
@@ -13,7 +13,7 @@ script = ExtResource( 4 )
 modulate = Color( 0.478431, 0.478431, 0.380392, 1 )
 margin_right = 40.0
 margin_bottom = 40.0
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="MainLabel" type="Label" parent="."]
 anchor_top = 0.1

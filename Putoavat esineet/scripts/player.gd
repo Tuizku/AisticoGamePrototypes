@@ -3,16 +3,21 @@ extends Area2D
 export var PlayerIndex : int = 0
 var keys = ["ui_left", "ui_down", "ui_right"]
 onready var gameController = get_parent()
+onready var animator = get_node("AnimationPlayer")
+
+var up : bool = true
 
 func _ready():
 	position.x = get_viewport_rect().size.x / 6 * (1 + 2 * PlayerIndex)
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed(keys[PlayerIndex]):
-		if visible:
-			hide()
+		if up:
+			up = false
+			animator.play("UpDown")
 		else: 
-			show()
+			up = true
+			animator.play_backwards("UpDown")
 
 
 func _on_Player_body_entered(body):
