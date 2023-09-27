@@ -9,24 +9,32 @@ var itemScene = load("res://scenes/item.tscn")
 var itemRows
 
 # Exports
-export var StartSpawnTime : float = 5
-export var StartItemSpeed : float = 200
 export var LevelAmount : int = 3
 export var SelectRowsAmount : int = 3
-#export var RowsToSpawn : Array = [3, 10] # Rows to spawn in slow and fast mode
+export var FastModeSettings = {
+	"startSpeed": 250,
+	"startSpawnTime": 4,
+	"valueFlickeringPercentage": 0.2,
+	"speedIncByTime": 10,
+	"spawnTimeDecByTime": 0.15,
+	"speedIncByMultiplier": 30,
+	"spawnTimeDecByMultiplier": 0.25
+}
 
 # Variables
-var selectedRows
-var STATE = 0
-var time : float = 0
+var selectedRows # holds all rows that will be played in this level
+var STATE = 0 # game state
+var time : float = 0 # used time in current state
 var rowsGenerated = 0
+var lastRowSpawnedTime : float = -FastModeSettings["startSpawnTime"]
 
-var learningRowsLeft : Array = []
-var lastLearningRow
+var learningRowsLeft : Array = [] # holds all the rows that haven't been learned yet
+var fastModeSpeed = FastModeSettings["startSpeed"]
+var fastModeSpawnTime = FastModeSettings["startSpawnTime"]
 
-var score = 0
-var combo = 0
-var comboMultiplier : int = 1
+var score = 0 # total score
+var multiplier = 1 # multiplies catched scores
+var combo = 0 # multiplier increases by every 5 combos
 
 
 #---------------------------------Functions-------------------------------------#
@@ -47,7 +55,7 @@ func get_random_item_positions(amount):
 	return result
 
 func change_points(amount, player_index):
-	if amount > 0: score += amount * comboMultiplier
+	if amount > 0: score += amount * multiplier
 	else: score += amount
 	if score < 0: score = 0
 	pointsText.text = str(score)
@@ -58,37 +66,56 @@ func change_points(amount, player_index):
 	instance.rect_position = Vector2(screen.x / 6 * (1 + player_index * 2), screen.y * 0.75)
 	instance.rect_position.x -= instance.rect_size.x * 0.5
 	add_child(instance)
-	instance.start(amount, comboMultiplier)
+	instance.start(amount, multiplier)
 
 func inc_combo():
 	combo += 1
-	comboMultiplier = 1 + combo / 5
-	if comboMultiplier > 5: comboMultiplier = 5
-	comboText.text = "x" + str(comboMultiplier)
+	multiplier = 1 + combo / 5
+	if multiplier > 5: multiplier = 5
+	comboText.text = "x" + str(multiplier)
 
 func lose_combo():
 	combo = 0
-	comboMultiplier = 1
+	multiplier = 1
 	comboText.text = "x1"
 
 var callsByRow = 0
-var callItemsAreCorrect = true
+var correctCallItems = 0
 func was_row_learned(_score, _row_data):
-	# This gets called by the collected and freed items. When all rows items have called here,
+	# This gets called by the collected and freed items. When all row's items have called here,
 	# the row gets either erased from learningRowsLeft or nothing happens to it
 	if len(learningRowsLeft) == 0: return
 	
 	callsByRow += 1
-	if _score < 0: callItemsAreCorrect = false
+	if _score < 0: correctCallItems = -1
+	elif correctCallItems != -1 and _score > 0: correctCallItems += 1
 	
 	if callsByRow >= len(_row_data): # If all items have called here
-		if callItemsAreCorrect == true: learningRowsLeft.erase(_row_data)
+		if correctCallItems >= 1: learningRowsLeft.erase(_row_data)
 		callsByRow = 0
-		callItemsAreCorrect = true
+		correctCallItems = 0
 
-func control_state(input):
+func control_state(input, waitTime):
 	if input == "next": STATE += 1
-	elif input == "reset": STATE = 0
+	elif input == "reset": 
+		STATE = 0
+		LevelAmount -= 1
+		if LevelAmount <= 0:
+			datamanager.add_int_to_save_var(score, "placements")
+			var _sceneInstance = get_tree().change_scene("res://scenes/end.tscn")
+	if waitTime > 0:
+		var oldState = STATE
+		STATE = -1
+		
+		var timer = Timer.new()
+		timer.wait_time = waitTime
+		timer.one_shot = true
+		add_child(timer)
+		timer.start()
+		yield(timer, "timeout")
+		timer.queue_free()
+		STATE = oldState
+	
 	time = 0
 
 #---------------------------Controlling-Functions-------------------------------#
@@ -102,7 +129,7 @@ func _ready():
 		var text = file.get_as_text()
 		itemRows = parse_json(text)
 	
-	# Setup texts, show wave text for 4 seconds and start wave
+	# Setup texts
 	pointsText.text = "0"
 	comboText.text = "x1"
 
@@ -111,6 +138,10 @@ func _process(delta):
 	time += delta
 	
 	if STATE == 0:
+		# Reset values
+		fastModeSpawnTime = FastModeSettings["startSpawnTime"]
+		lastRowSpawnedTime = -FastModeSettings["startSpawnTime"]
+		
 		# Select new rows to be played
 		selectedRows = []
 		var rows : Array = itemRows
@@ -118,24 +149,23 @@ func _process(delta):
 		for i in range(SelectRowsAmount):
 			selectedRows.append(rows[i])
 		
-		# Setup the learning part
+		# Setup the learningRowsLeft and go to the next state
 		learningRowsLeft = selectedRows.duplicate()
-		
-		control_state("next")
+		control_state("next", 0)
 	if STATE == 1: show_text("Nyt harkiten!")
 	elif STATE == 2: learn_item_spawning()
 	elif STATE == 3: show_text("answers should be here...")
 	elif STATE == 4: show_text("Nyt tarkkana!")
 	elif STATE == 5: fast_item_spawning(10)
 	elif STATE == 6: show_text("Hyvä hyvä!")
-	elif STATE == 7: control_state("reset")
+	elif STATE == 7: control_state("reset", 3)
 
 
 func show_text(text):
 	if centerText.text != text: centerText.text = text
 	if time > 4:
 		centerText.text = ""
-		control_state("next")
+		control_state("next", 0)
 
 
 func learn_item_spawning():
@@ -147,7 +177,7 @@ func learn_item_spawning():
 		# If all rows have been learned, go to next state
 		if len(learningRowsLeft) == 0:
 			rowsGenerated = 0
-			control_state("next")
+			control_state("next", 3)
 			return
 		
 		var selectedRow = learningRowsLeft[randi() % len(learningRowsLeft)]
@@ -158,24 +188,31 @@ func learn_item_spawning():
 			var itemData = selectedRow[itemIndex]
 			var instance = itemScene.instance()
 			instance.Speed = speed
-			instance.position = Vector2(itemPositions[itemIndex], -50)
+			instance.position = Vector2(itemPositions[itemIndex], -100)
 			instance.create_item(itemData, selectedRow)
 			add_child(instance)
 		rowsGenerated += 1
 
 
 func fast_item_spawning(spawn_rows_amount):
-	var speed = 250
-	var spawnTime = 5
-	
-	print(str(time) + "  " + str(rowsGenerated * spawnTime))
 	# Spawn a row of items when spawnTime amount elapsed after last row spawning
-	if time >= rowsGenerated * spawnTime:
+	if time >= lastRowSpawnedTime + fastModeSpawnTime:
 		# If enough items are spawned, go to next state
 		if rowsGenerated >= spawn_rows_amount:
 			rowsGenerated = 0
-			control_state("next")
+			control_state("next", 3)
 			return
+		
+		# Update speed and spawnTime
+		var flickering = FastModeSettings["valueFlickeringPercentage"]
+		fastModeSpeed = FastModeSettings["startSpeed"] # SPEED:
+		fastModeSpeed += FastModeSettings["speedIncByTime"] * rowsGenerated
+		fastModeSpeed += FastModeSettings["speedIncByMultiplier"] * (multiplier - 1)
+		fastModeSpeed += fastModeSpeed * rand_range(flickering * -0.5, flickering * 0.5)
+		fastModeSpawnTime = FastModeSettings["startSpawnTime"] # SPAWNTIME:
+		fastModeSpawnTime -= FastModeSettings["spawnTimeDecByTime"] * rowsGenerated
+		fastModeSpawnTime -= FastModeSettings["spawnTimeDecByMultiplier"] * (multiplier - 1)
+		fastModeSpawnTime += fastModeSpawnTime * rand_range(flickering * -0.5, flickering * 0.5)
 		
 		var selectedRow = selectedRows[randi() % len(selectedRows)]
 		var itemPositions = get_random_item_positions(len(selectedRow))
@@ -184,9 +221,10 @@ func fast_item_spawning(spawn_rows_amount):
 		for itemIndex in len(selectedRow):
 			var item_data = selectedRow[itemIndex]
 			var instance = itemScene.instance()
-			instance.Speed = speed
-			instance.position = Vector2(itemPositions[itemIndex], -50)
+			instance.Speed = fastModeSpeed
+			instance.position = Vector2(itemPositions[itemIndex], -100)
 			instance.create_item(item_data, selectedRow)
 			add_child(instance)
 			
 		rowsGenerated += 1
+		lastRowSpawnedTime = time

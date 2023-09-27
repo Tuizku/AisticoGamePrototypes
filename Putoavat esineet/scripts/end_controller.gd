@@ -2,16 +2,19 @@ extends Control
 
 var placement_label = load("res://scenes/placement_label.tscn")
 
-# This is used to sort the placements data from biggest to smallest
-func biggest_to_smallest(a, b):
-	return b - a
-
 func _ready():
-	# Load placements data, sort and show top 5 or under
-	var data = datamanager.load_save_var("placements")
-	data.sort()
-	data.sort_custom(self, "biggest_to_smallest")
-	for i in int(min(len(data), 5)): # Show placements up to top 5
+	# Load placements rawData and sort from smallest to biggest
+	var rawData = datamanager.load_save_var("placements")
+	rawData.sort()
+	
+	# Add values to data from biggest to smallest
+	var data : Array = []
+	for i in len(rawData): # sort from biggest to smallest
+		data.append(rawData[len(rawData) - 1 - i])
+	
+	
+	# Show placements up to top 5
+	for i in int(min(len(data), 5)):
 		var instance = placement_label.instance()
 		instance.text = str(i + 1) + ".  " + str(data[i])
 		get_node("VBoxContainer").add_child(instance)
