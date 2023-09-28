@@ -1,20 +1,28 @@
 extends Node2D
 
 # Loaded stuff
-onready var pointsText : Label = get_node("UI/HBoxContainer/PointsBox/Label")
-onready var comboText : Label = get_node("UI/HBoxContainer/MultiplierBox/Label")
-onready var centerText : Label = get_node("UI/CenterText")
+var itemRows
 var floatingLabelScene = load("res://scenes/floating_label.tscn")
 var itemScene = load("res://scenes/item.tscn")
-var itemRows
+onready var ui = {
+	"game": {
+		"control": get_node("UI/Game"),
+		"points": get_node("UI/Game/HBoxContainer/PointsBox/Label"),
+		"multiplier": get_node("UI/Game/HBoxContainer/MultiplierBox/Label"),
+		"center": get_node("UI/Game/CenterText")
+	},
+	"answers": {
+		"control": get_node("UI/Answers")
+	}
+}
 
 # Exports
 export var LevelAmount : int = 3
 export var SelectRowsAmount : int = 3
 export var FastModeSettings = {
-	"startSpeed": 250,
+	"startSpeed": 275,
 	"startSpawnTime": 4,
-	"valueFlickeringPercentage": 0.2,
+	"spawnTimeFlickeringPercentage": 1,
 	"speedIncByTime": 10,
 	"spawnTimeDecByTime": 0.15,
 	"speedIncByMultiplier": 30,
@@ -58,7 +66,7 @@ func change_points(amount, player_index):
 	if amount > 0: score += amount * multiplier
 	else: score += amount
 	if score < 0: score = 0
-	pointsText.text = str(score)
+	ui["game"]["points"].text = str(score)
 	
 	# Floating Label Effect
 	var screen = get_viewport_rect().size
@@ -72,12 +80,12 @@ func inc_combo():
 	combo += 1
 	multiplier = 1 + combo / 5
 	if multiplier > 5: multiplier = 5
-	comboText.text = "x" + str(multiplier)
+	ui["game"]["multiplier"].text = "x" + str(multiplier)
 
 func lose_combo():
 	combo = 0
 	multiplier = 1
-	comboText.text = "x1"
+	ui["game"]["multiplier"].text = "x1"
 
 var callsByRow = 0
 var correctCallItems = 0
@@ -118,6 +126,11 @@ func control_state(input, waitTime):
 	
 	time = 0
 
+func change_ui_section(section_name):
+	for key in ui.keys():
+		if key == section_name: ui[key]["control"].show()
+		else: ui[key]["control"].hide()
+
 #---------------------------Controlling-Functions-------------------------------#
 
 func _ready():
@@ -129,9 +142,10 @@ func _ready():
 		var text = file.get_as_text()
 		itemRows = parse_json(text)
 	
-	# Setup texts
-	pointsText.text = "0"
-	comboText.text = "x1"
+	# Setup
+	ui["game"]["points"].text = "0"
+	ui["game"]["multiplier"].text = "x1"
+	change_ui_section("game")
 
 
 func _process(delta):
@@ -154,7 +168,7 @@ func _process(delta):
 		control_state("next", 0)
 	if STATE == 1: show_text("Nyt harkiten!")
 	elif STATE == 2: learn_item_spawning()
-	elif STATE == 3: show_text("answers should be here...")
+	elif STATE == 3: showing_answers()
 	elif STATE == 4: show_text("Nyt tarkkana!")
 	elif STATE == 5: fast_item_spawning(10)
 	elif STATE == 6: show_text("Hyvä hyvä!")
@@ -162,10 +176,18 @@ func _process(delta):
 
 
 func show_text(text):
-	if centerText.text != text: centerText.text = text
+	if ui["game"]["center"].text != text: ui["game"]["center"].text = text
 	if time > 4:
-		centerText.text = ""
+		ui["game"]["center"].text = ""
 		control_state("next", 0)
+
+
+func showing_answers():
+	if ui["answers"]["control"].visible == false: change_ui_section("answers")
+	
+	if Input.is_key_pressed(KEY_SPACE):
+		change_ui_section("game")
+		control_state("next", 2)
 
 
 func learn_item_spawning():
@@ -204,11 +226,11 @@ func fast_item_spawning(spawn_rows_amount):
 			return
 		
 		# Update speed and spawnTime
-		var flickering = FastModeSettings["valueFlickeringPercentage"]
+		var flickering = FastModeSettings["spawnTimeFlickeringPercentage"]
 		fastModeSpeed = FastModeSettings["startSpeed"] # SPEED:
 		fastModeSpeed += FastModeSettings["speedIncByTime"] * rowsGenerated
 		fastModeSpeed += FastModeSettings["speedIncByMultiplier"] * (multiplier - 1)
-		fastModeSpeed += fastModeSpeed * rand_range(flickering * -0.5, flickering * 0.5)
+		#fastModeSpeed += fastModeSpeed * rand_range(flickering * -0.5, flickering * 0.5)
 		fastModeSpawnTime = FastModeSettings["startSpawnTime"] # SPAWNTIME:
 		fastModeSpawnTime -= FastModeSettings["spawnTimeDecByTime"] * rowsGenerated
 		fastModeSpawnTime -= FastModeSettings["spawnTimeDecByMultiplier"] * (multiplier - 1)
