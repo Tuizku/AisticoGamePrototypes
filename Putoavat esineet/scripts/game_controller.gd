@@ -1,11 +1,11 @@
 extends Node2D
 
 # Loaded stuff
-var itemRows
-var floatingLabelScene = load("res://scenes/floating_label.tscn")
+var itemRows # holds all the itemRows data
+var floatingLabelScene = load("res://scenes/floating_label.tscn") # The text effect scene after item was caught
 var itemScene = load("res://scenes/item.tscn")
 onready var ui = {
-	"game": {
+	"game": { # You can change points text like this: ui["game"]["points"].text = ""
 		"control": get_node("UI/Game"),
 		"points": get_node("UI/Game/HBoxContainer/PointsBox/Label"),
 		"multiplier": get_node("UI/Game/HBoxContainer/MultiplierBox/Label"),
@@ -17,24 +17,24 @@ onready var ui = {
 }
 
 # Exports
-export var LevelAmount : int = 3
-export var SelectRowsAmount : int = 3
+export var LevelAmount : int = 3 # Level = the combination of all states
+export var SelectRowsAmount : int = 3 # How many rows will there be in a single level
 export var FastModeSettings = {
 	"startSpeed": 275,
 	"startSpawnTime": 4,
-	"spawnTimeFlickeringPercentage": 1,
-	"speedIncByTime": 10,
+	"spawnTimeFlickeringPercentage": 1.0, # 1 = 100% -> spawnTime changes randomly from -50% to +50%
+	"speedIncByTime": 10, # ByTime means that these are added as many times as rowsGenerated is
 	"spawnTimeDecByTime": 0.15,
-	"speedIncByMultiplier": 30,
-	"spawnTimeDecByMultiplier": 0.25
+	"speedIncByMultiplier": 30, # ByMultiplier means that these are starting to add up when
+	"spawnTimeDecByMultiplier": 0.25 # you get to 2x and over
 }
 
 # Variables
 var selectedRows # holds all rows that will be played in this level
 var STATE = 0 # game state
 var time : float = 0 # used time in current state
-var rowsGenerated = 0
-var lastRowSpawnedTime : float = -FastModeSettings["startSpawnTime"]
+var rowsGenerated = 0 # how many rows have been generated in this state?
+var lastRowSpawnedTime : float = -FastModeSettings["startSpawnTime"] # used in fast mode to see when to spawn a new row
 
 var learningRowsLeft : Array = [] # holds all the rows that haven't been learned yet
 var fastModeSpeed = FastModeSettings["startSpeed"]
@@ -108,7 +108,7 @@ func control_state(input, waitTime):
 	elif input == "reset": 
 		STATE = 0
 		LevelAmount -= 1
-		if LevelAmount <= 0:
+		if LevelAmount <= 0: # Have all the levels been played?
 			datamanager.add_int_to_save_var(score, "placements")
 			var _sceneInstance = get_tree().change_scene("res://scenes/end.tscn")
 	if waitTime > 0:
@@ -131,7 +131,7 @@ func change_ui_section(section_name):
 		if key == section_name: ui[key]["control"].show()
 		else: ui[key]["control"].hide()
 
-#---------------------------Controlling-Functions-------------------------------#
+#------------------------------Game-Functions-----------------------------------#
 
 func _ready():
 	randomize()
@@ -230,7 +230,6 @@ func fast_item_spawning(spawn_rows_amount):
 		fastModeSpeed = FastModeSettings["startSpeed"] # SPEED:
 		fastModeSpeed += FastModeSettings["speedIncByTime"] * rowsGenerated
 		fastModeSpeed += FastModeSettings["speedIncByMultiplier"] * (multiplier - 1)
-		#fastModeSpeed += fastModeSpeed * rand_range(flickering * -0.5, flickering * 0.5)
 		fastModeSpawnTime = FastModeSettings["startSpawnTime"] # SPAWNTIME:
 		fastModeSpawnTime -= FastModeSettings["spawnTimeDecByTime"] * rowsGenerated
 		fastModeSpawnTime -= FastModeSettings["spawnTimeDecByMultiplier"] * (multiplier - 1)
