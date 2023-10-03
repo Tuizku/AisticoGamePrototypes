@@ -1,0 +1,173 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sprites/char_box.png" type="Texture" id=1]
+[ext_resource path="res://fonts/font.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Animation" id=4]
+resource_name = "Fall"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Image:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Image:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 10, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 10, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Jumping"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Image:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -25 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -25 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "Selecting"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Image:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -25 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -25 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Stop Selecting"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Image:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 3,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 3,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Char Box 1" type="Control"]
+anchor_right = 0.02
+anchor_bottom = 0.03
+
+[node name="Image" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 3.24249e-05
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 41.6001
+alignment = 1
+
+[node name="Text" type="RichTextLabel" parent="VBoxContainer"]
+modulate = Color( 1, 0.639216, 0.517647, 1 )
+margin_right = 16.0
+margin_bottom = 56.0
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+fit_content_height = true
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fall = SubResource( 4 )
+anims/Jumping = SubResource( 3 )
+anims/Selecting = SubResource( 1 )
+"anims/Stop Selecting" = SubResource( 2 )

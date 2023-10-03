@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Anturista Ohjain", "Anturista Ohjain\Anturista Ohjain.pyproj", "{6C55693F-5ABA-49FB-97F4-32808AB70866}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C55693F-5ABA-49FB-97F4-32808AB70866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C55693F-5ABA-49FB-97F4-32808AB70866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {197AF882-5068-4A59-B897-36BBC5FCAB48}
+	EndGlobalSection
+EndGlobal
