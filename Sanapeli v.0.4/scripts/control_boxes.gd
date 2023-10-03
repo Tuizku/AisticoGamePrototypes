@@ -7,97 +7,101 @@ var normal_texture = ResourceLoader.load("res://sprites/char_box.png")
 var inverted_texture = ResourceLoader.load("res://sprites/char_box_inverted.png")
 
 var boxes = []
-var boxImages = []
+var boxButtons = []
 var boxTexts = []
 var boxAnimators = []
-var originalPoses = []
+
+var gameController
+var wordStartChrs
 
 func _ready():
 	for i in get_child_count():
 		boxes.append(get_child(i))
-		boxImages.append(boxes[i].get_node("Image"))
-		boxTexts.append(boxes[i].get_node("VBoxContainer").get_node("Text"))
+		boxButtons.append(boxes[i].get_node("Button"))
+		boxTexts.append(boxes[i].get_node("Label"))
 		boxAnimators.append(boxes[i].get_node("AnimationPlayer") as AnimationPlayer)
-		originalPoses.append(boxes[i].rect_position)
-		boxes[i].get_node("VBoxContainer").margin_bottom = 0
+		
+		# Fix label bugs
+		boxTexts[i].margin_right = 0
+		boxTexts[i].margin_bottom = 0
 
-func changeText(_richtext, _str):
-	_richtext.bbcode_text = "[center]" + _str.to_upper()
 
 func create_char_boxes(_count):
 	# Delete old if there are
 	for i in get_child_count():
 		get_child(i).queue_free()
 	boxes.clear()
-	boxImages.clear()
+	#boxImages.clear()
+	boxButtons.clear()
 	boxTexts.clear()
 	boxAnimators.clear()
 	
 	# Find the right size for boxes
 	var boxSize = 1
 	var sum = boxSize * _count + boxSize * 0.5 * (_count + 1)
-	boxSize = min(0.13, 1 / sum)
+	boxSize = min(0.18, 1 / sum) # maybe have to change this
 	var boxGap = (1 - boxSize * _count) / (_count + 1)
 	
-	var scene = load("res://scenes/char_box.tscn")
+	var scene = load("res://scenes/char_button.tscn")
 	for i in _count:
 		# Create and Setup
 		var box = scene.instance()
-		var boxText = box.get_node("VBoxContainer").get_node("Text")
+		#var boxText = box.get_node("Label")
 		add_child(box)
 		boxes.append(box)
-		boxImages.append(box.get_node("Image"))
-		boxTexts.append(boxText)
+		#boxImages.append(box.get_node("Image"))
+		boxButtons.append(box.get_node("Button"))
+		boxTexts.append(box.get_node("Label"))
 		boxAnimators.append(box.get_node("AnimationPlayer"))
 		
 		# Set Anchors
 		box.anchor_left = boxSize * i + boxGap * (i + 1)
 		box.anchor_right = box.anchor_left + boxSize
-		box.anchor_bottom = 0.3
-		box.anchor_top = box.anchor_bottom - boxSize
+		box.anchor_bottom = 1
+		box.anchor_top = 0
 		
-		# Fixes stuff with the text centering
-		box.margin_right = 0
-		box.margin_bottom = box.rect_size.x / 2
-		box.get_node("VBoxContainer").margin_bottom = 0
+		# Fix label bugs
+		boxTexts[i].margin_right = 0
+		boxTexts[i].margin_bottom = 0
+	
+	if gameController != null: connect_buttons()
 
+
+func connect_buttons():
+	for i in len(boxButtons):
+		if Type == "sel":
+			boxButtons[i].connect("pressed", gameController, "add_char_to_word", [i])
+		if Type == "word" and wordStartChrs[i] == "":
+			boxButtons[i].connect("pressed", gameController, "remove_char_from_word", [i])
 
 
 func _on_Control_chrs_created(_chrs):
 	for i in len(boxTexts):
-		changeText(boxTexts[i], _chrs[i])
-		#if _chrs[i] in letterRarity[0]: boxes[i].modulate = Color.white
-		#elif _chrs[i] in letterRarity[1]: boxes[i].modulate = Color.hotpink
-		#elif _chrs[i] in letterRarity[2]: boxes[i].modulate = Color.yellow
-
-
-func _on_Control_char_box_selected(_box_index):
-	for i in len(boxes):
-		if _box_index == i:
-			boxAnimators[i].play("Selecting")
-			boxImages[i].texture = inverted_texture
-			boxTexts[i].modulate = Color("FFF6C9")
-		elif boxAnimators[i].is_playing():
-			boxAnimators[i].play("Stop Selecting")
-			boxImages[i].texture = normal_texture
-			boxTexts[i].modulate = Color("ffa384")
+		boxTexts[i].text = _chrs[i].to_upper()
 
 
 func _on_Control_char_chosen(_char, _index):
-	changeText(boxTexts[_index], _char)
+	boxTexts[_index].text = _char.to_upper()
 
 
 func _on_Control_editing_char_selected(_index):
 	for i in len(boxes):
 		if i == _index:
 			boxes[i].modulate = Color.white
+			boxAnimators[i].play("Editing")
+		else: 
+			boxAnimators[i].play("Stop Editing")
+			
+		if wordStartChrs[i] == "":
+			boxes[i].modulate = Color.white
 		else: boxes[i].modulate = Color.gray
 
 
 func _on_Control_word_created(_word_start):
+	wordStartChrs = _word_start
 	create_char_boxes(len(_word_start))
 	for i in len(_word_start):
-		changeText(boxTexts[i], _word_start[i])
+		boxTexts[i].text = _word_start[i].to_upper()
 
 
 func _on_Control_hide_boxes(type):
@@ -108,9 +112,9 @@ func _on_Control_show_boxes(type):
 	if type == Type or type == "all": show()
 
 
-
 func _on_Control_answer_animation(answer, cor_answer):
-	#for i in len(boxes): boxes[i].modulate = Color.white
+	for i in len(boxes):
+		boxes[i].modulate = Color.gray
 	
 	if answer == cor_answer:
 		for i in len(boxAnimators):
@@ -122,7 +126,11 @@ func _on_Control_answer_animation(answer, cor_answer):
 			boxes[i].modulate = Color.white
 			boxAnimators[i].play("Fall")
 			if answer[i] != cor_answer[i]: 
-				boxImages[i].texture = inverted_texture
 				boxTexts[i].modulate = Color("FFF6C9")
-				changeText(boxTexts[i], cor_answer[i])
+				boxTexts[i].text = cor_answer[i].to_upper()
 			yield(get_tree().create_timer(0.2), "timeout")
+
+
+func _on_Control_send_gamecontroller(_node):
+	gameController = _node
+	connect_buttons()

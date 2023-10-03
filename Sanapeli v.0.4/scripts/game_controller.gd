@@ -1,7 +1,7 @@
 extends Control
 
 # Exports
-export var GameTime : float = 29
+export var GameTime : float = 20
 # Data and Nodes
 var wordsData
 var usedWords : Array = []
@@ -26,9 +26,9 @@ var boxSelectedTime : float = 0
 var timeLeft : float = 0
 
 # Signals
+signal send_gamecontroller(_node)
 signal word_created(_hint) # Creates the char boxes and adds the characters
 signal chrs_created(_chrs) # Only adds the characters to boxes
-signal char_box_selected(_box_index)
 signal editing_char_selected(_index)
 signal char_chosen(_char, _index)
 signal change_time(time)
@@ -209,19 +209,13 @@ func _ready():
 	
 	load_words()
 	new_word()
+	emit_signal("send_gamecontroller", self)
 	timeLeft = GameTime
 	
 	middleText = get_node("Middle Text Container").get_node("Middle Text") as RichTextLabel
 	middleText.bbcode_text = "[center]" + str(selectedWord["definition"])
 
 func _physics_process(delta: float) -> void:
-	# Run inputs if editing a word, else reset box selections to avoid bugs in next word
-	if editingWord: pc_inputs(delta)
-	elif handPos != -1:
-		boxSelectedTime = 0
-		handPos = -1
-		emit_signal("char_box_selected", int(handPos))
-	
 	# Change timeLeft and send signal to time slider for an update
 	timeLeft -= delta
 	emit_signal("change_time", 1 - timeLeft / GameTime)
@@ -233,49 +227,22 @@ func _physics_process(delta: float) -> void:
 				emit_signal("char_chosen", chrs[handPos], editingCharIndex)
 				word[editingCharIndex] = chrs[handPos]
 			editingCharIndex = -1
-			emit_signal("editing_char_selected", editingCharIndex)
+			#emit_signal("editing_char_selected", editingCharIndex)
 			cutscene()
 		timeLeft = GameTime
 
 
-var sensor_button_pressed_time : float = 0
-var sensor_button_fix_time : float = 0
-var sensor_button_enabled : bool = false
-func pc_inputs(delta_param : float):
-	# Allows the simplier input system -> hold hand to keep changing set char
-	if Input.is_action_pressed("sensor button"): 
-		sensor_button_pressed_time += delta_param
-		sensor_button_enabled = false
-	else: sensor_button_pressed_time = 0
-	
-	# Fixes the multi inputs. so the char can only be changed every 200ms
-	if not sensor_button_enabled: sensor_button_fix_time += delta_param
-	if sensor_button_fix_time > 0.2:
-		sensor_button_enabled = true
-		sensor_button_fix_time = 0
-	
-	
-	# Change Hand Position (resets boxSelectedTime and sends signal to boxes about handPos)
-	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("sensor button") or sensor_button_pressed_time >= 1:
-		if handPos < 3: handPos += 1
-		else: handPos = 0
-		boxSelectedTime = 0
-		sensor_button_pressed_time = 0
-		emit_signal("char_box_selected", int(handPos))
-	
-	# When character is set, boxSelectedTime goes up by delta
-	if handPos != -1: boxSelectedTime += delta_param
-	
-	# Character selected
-	if boxSelectedTime >= 2:
-		emit_signal("char_chosen", chrs[handPos], editingCharIndex)
-		word[editingCharIndex] = chrs[handPos]
-		check_word()
-		
-		boxSelectedTime = 0
-		handPos = -1
-		emit_signal("char_box_selected", int(handPos))
+func add_char_to_word(id: int):
+	if not editingWord: return
+	emit_signal("char_chosen", chrs[id], editingCharIndex)
+	word[editingCharIndex] = chrs[id]
+	check_word()
 
+func remove_char_from_word(id: int):
+	if not editingWord: return
+	emit_signal("char_chosen", " ", id)
+	word[id] = " "
+	check_word()
 
 
 func _on_Quit_Button_pressed():

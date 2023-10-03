@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/char_box.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/char_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/game_controller.gd" type="Script" id=2]
 [ext_resource path="res://scripts/control_boxes.gd" type="Script" id=3]
 [ext_resource path="res://sprites/time slider.png" type="Texture" id=4]
@@ -18,69 +18,50 @@ anchor_bottom = 1.0
 color = Color( 0.454902, 0.741176, 0.796078, 1 )
 
 [node name="Sel Char Boxes" type="Control" parent="."]
+anchor_top = 0.65
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.875
 script = ExtResource( 3 )
 Type = "sel"
 
-[node name="Char Box 1" parent="Sel Char Boxes" instance=ExtResource( 1 )]
-anchor_left = 0.13
-anchor_top = 0.64
-anchor_right = 0.27
-anchor_bottom = 0.84
-margin_right = -2.00002
-margin_bottom = 14.0
+[node name="Char Button 1" parent="Sel Char Boxes" instance=ExtResource( 1 )]
+anchor_left = 0.125
+anchor_right = 0.275
+anchor_bottom = 1.0
 
-[node name="Char Box 2" parent="Sel Char Boxes" instance=ExtResource( 1 )]
-anchor_left = 0.33
-anchor_top = 0.64
-anchor_right = 0.47
-anchor_bottom = 0.84
-margin_right = -2.0
-margin_bottom = 14.0
+[node name="Char Button 2" parent="Sel Char Boxes" instance=ExtResource( 1 )]
+anchor_left = 0.325
+anchor_right = 0.475
+anchor_bottom = 1.0
 
-[node name="Char Box 3" parent="Sel Char Boxes" instance=ExtResource( 1 )]
-anchor_left = 0.53
-anchor_top = 0.64
-anchor_right = 0.67
-anchor_bottom = 0.84
-margin_right = -2.0
-margin_bottom = 14.0
+[node name="Char Button 3" parent="Sel Char Boxes" instance=ExtResource( 1 )]
+anchor_left = 0.525
+anchor_right = 0.675
+anchor_bottom = 1.0
 
-[node name="Char Box 4" parent="Sel Char Boxes" instance=ExtResource( 1 )]
-anchor_left = 0.73
-anchor_top = 0.64
-anchor_right = 0.87
-anchor_bottom = 0.84
-margin_right = -2.0
-margin_bottom = 14.0
+[node name="Char Button 4" parent="Sel Char Boxes" instance=ExtResource( 1 )]
+anchor_left = 0.725
+anchor_right = 0.875
+anchor_bottom = 1.0
 
 [node name="Word Char Boxes" type="Control" parent="."]
+anchor_top = 0.15
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.375
 script = ExtResource( 3 )
 Type = "word"
 
 [node name="Time" type="Control" parent="."]
+anchor_top = 0.95
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 5 )
 
 [node name="Fill" type="TextureRect" parent="Time"]
 modulate = Color( 0.937255, 0.905882, 0.737255, 1 )
-anchor_top = 0.95
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
 stretch_mode = 1
-
-[node name="Text" type="RichTextLabel" parent="Time"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 0.125
-margin_top = 24.0
-bbcode_enabled = true
-bbcode_text = "[center]1min 20s"
-text = "1min 20s"
 
 [node name="Middle Text Container" type="VBoxContainer" parent="."]
 anchor_left = 0.025
@@ -108,12 +89,13 @@ flat = true
 
 [connection signal="answer_animation" from="." to="Word Char Boxes" method="_on_Control_answer_animation"]
 [connection signal="change_time" from="." to="Time" method="_on_Control_change_time"]
-[connection signal="char_box_selected" from="." to="Sel Char Boxes" method="_on_Control_char_box_selected"]
 [connection signal="char_chosen" from="." to="Word Char Boxes" method="_on_Control_char_chosen"]
 [connection signal="chrs_created" from="." to="Sel Char Boxes" method="_on_Control_chrs_created"]
 [connection signal="editing_char_selected" from="." to="Word Char Boxes" method="_on_Control_editing_char_selected"]
 [connection signal="hide_boxes" from="." to="Sel Char Boxes" method="_on_Control_hide_boxes"]
 [connection signal="hide_boxes" from="." to="Word Char Boxes" method="_on_Control_hide_boxes"]
+[connection signal="send_gamecontroller" from="." to="Sel Char Boxes" method="_on_Control_send_gamecontroller"]
+[connection signal="send_gamecontroller" from="." to="Word Char Boxes" method="_on_Control_send_gamecontroller"]
 [connection signal="show_boxes" from="." to="Sel Char Boxes" method="_on_Control_show_boxes"]
 [connection signal="show_boxes" from="." to="Word Char Boxes" method="_on_Control_show_boxes"]
 [connection signal="word_created" from="." to="Word Char Boxes" method="_on_Control_word_created"]
