@@ -16,6 +16,7 @@ anchor_bottom = 1.0
 color = Color( 0.454902, 0.741176, 0.796078, 1 )
 
 [node name="Main Text" type="RichTextLabel" parent="."]
+visible = false
 modulate = Color( 0.937255, 0.905882, 0.737255, 1 )
 anchor_top = 0.325
 anchor_right = 1.0
@@ -27,6 +28,7 @@ text = "?/6 oikein!"
 scroll_active = false
 
 [node name="Points Text" type="RichTextLabel" parent="."]
+visible = false
 modulate = Color( 0.937255, 0.905882, 0.737255, 1 )
 anchor_top = 0.525
 anchor_right = 1.0
@@ -56,5 +58,32 @@ anchor_right = 0.65
 anchor_bottom = 0.9
 custom_fonts/font = ExtResource( 3 )
 text = "Uusi peli"
+
+[node name="MainLabel" type="Label" parent="."]
+anchor_top = 0.015
+anchor_right = 1.0
+anchor_bottom = 0.15
+custom_fonts/font = ExtResource( 3 )
+text = "Pelatut sanat"
+align = 1
+valign = 1
+
+[node name="CorrectLabel" type="Label" parent="."]
+anchor_top = 0.15
+anchor_right = 0.475
+anchor_bottom = 0.25
+custom_fonts/font = ExtResource( 1 )
+text = "?/6 oikein"
+align = 2
+valign = 1
+
+[node name="PointsLabel" type="Label" parent="."]
+anchor_left = 0.525
+anchor_top = 0.15
+anchor_right = 1.0
+anchor_bottom = 0.25
+custom_fonts/font = ExtResource( 1 )
+text = "??? pistettä"
+valign = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

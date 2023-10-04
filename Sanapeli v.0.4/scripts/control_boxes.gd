@@ -126,6 +126,7 @@ func _on_Control_answer_animation(answer, cor_answer):
 			boxes[i].modulate = Color.white
 			boxAnimators[i].play("Fall")
 			if answer[i] != cor_answer[i]: 
+				boxButtons[i].texture_normal = inverted_texture
 				boxTexts[i].modulate = Color("FFF6C9")
 				boxTexts[i].text = cor_answer[i].to_upper()
 			yield(get_tree().create_timer(0.2), "timeout")

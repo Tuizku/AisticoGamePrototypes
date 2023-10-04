@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://fonts/font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/menu.gd" type="Script" id=2]
+[ext_resource path="res://sprites/button.png" type="Texture" id=3]
+[ext_resource path="res://sprites/sounds_on.png" type="Texture" id=4]
+[ext_resource path="res://sprites/sounds_off.png" type="Texture" id=5]
+[ext_resource path="res://sprites/button_clicked.png" type="Texture" id=6]
+[ext_resource path="res://sprites/book.png" type="Texture" id=7]
+
+[node name="MenuControl" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="StartButton" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0.588235 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+text = "aloita klikkaamalla"
+flat = true
+icon_align = 1
+
+[node name="VolumeButton" type="TextureButton" parent="."]
+anchor_left = 0.825
+anchor_top = 0.025
+anchor_right = 0.985
+anchor_bottom = 0.25
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="OffTexture" type="TextureRect" parent="VolumeButton"]
+anchor_left = 0.2
+anchor_top = 0.15
+anchor_right = 0.8
+anchor_bottom = 0.85
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="OnTexture" type="TextureRect" parent="VolumeButton"]
+anchor_left = 0.2
+anchor_top = 0.15
+anchor_right = 0.8
+anchor_bottom = 0.85
+margin_left = -2.47955e-05
+margin_right = -2.28882e-05
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="WordlistButton" type="TextureButton" parent="."]
+anchor_left = 0.015
+anchor_top = 0.025
+anchor_right = 0.175
+anchor_bottom = 0.25
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="Texture" type="TextureRect" parent="WordlistButton"]
+anchor_left = 0.2
+anchor_top = 0.15
+anchor_right = 0.8
+anchor_bottom = 0.85
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="VolumeButton" to="." method="_on_VolumeButton_pressed"]
+[connection signal="pressed" from="WordlistButton" to="." method="_on_WordlistButton_pressed"]

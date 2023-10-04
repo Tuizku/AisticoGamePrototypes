@@ -42,12 +42,7 @@ signal answer_animation(answer, cor_answer) # True or false?
 
 # Functions
 func load_words():
-	var file = File.new()
-	if not file.file_exists("res://data/words.json"):
-		return
-	file.open("res://data/words.json", File.READ)
-	var text = file.get_as_text()
-	wordsData = parse_json(text)
+	wordsData = data_control.load_words()
 func new_word():
 	select_word()
 	select_chrs()

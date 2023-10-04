@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "data_control",
+"language": "GDScript",
+"path": "res://scripts/data_control.gd"
+}, {
 "base": "Control",
 "class": "end_controller",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://scripts/funcs.gd"
 } ]
 _global_script_class_icons={
+"data_control": "",
 "end_controller": "",
 "funcs": ""
 }
@@ -27,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Sanapeli v.0.4"
-run/main_scene="res://scenes/end.tscn"
+run/main_scene="res://scenes/menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
