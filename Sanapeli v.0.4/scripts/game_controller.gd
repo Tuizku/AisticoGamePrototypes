@@ -1,7 +1,7 @@
 extends Control
 
 # Exports
-export var GameTime : float = 25
+export var GameTime : float = 10
 
 # Data and Nodes
 var wordsData
@@ -15,6 +15,8 @@ var defaultWordOverview = {
 var letterRarity : Array = ["aitneslo", "kuämvr", "jhypdögbfcwåqxz"]
 var middleText : RichTextLabel
 var rng : RandomNumberGenerator
+var starEmptyTexture : Texture = load("res://sprites/star_empty_glow.png")
+var starFilledTexture : Texture = load("res://sprites/star_filled_glow.png")
 
 # Whole Game Variables
 var difficulty : float = 0 # between 0 and 1 (1 is hardest)
@@ -74,6 +76,7 @@ func select_word():
 		# Add words to the pool (less stars -> more instances in pool)
 		for _i2 in range(3 - userData["words"][i]["stars"]): 
 			wordPool.append(userData["words"][i])
+	# If pool is empty, just take the whole wordlist as pool
 	if len(wordPool) == 0: wordPool = userData["words"]
 	
 	# Choose a random word from pool
@@ -153,15 +156,16 @@ func check_word():
 func cutscene():
 	# START OF CUTSCENE
 	
-	#add_points()
 	update_gameOverview()
 	change_difficulty()
+	selectedWord["stars"] = possibleStarsAmount
 	
 	editingWord = false
 	var time = max(0, timeLeft - 4)
 	
 	
 	# Show the correct word and if you were correct
+	control_star_display(true)
 	emit_signal("hide_boxes", "sel")
 	emit_signal("answer_animation", word, selectedWord["word"])
 	if gameOverview[-1]["points"] != 0: 
@@ -185,6 +189,7 @@ func cutscene():
 	
 	# if early hint cutscene would take more than 1 seconds, display it
 	if time >= 1:
+		control_star_display(false)
 		new_word()
 		middleText.bbcode_text = "[center]" + selectedWord["definition"]
 		emit_signal("hide_boxes", "word")
@@ -202,6 +207,7 @@ func cutscene():
 	editingWord = true
 	playingWordNum += 1
 	emit_signal("show_boxes", "all")
+	control_star_display(true)
 func update_gameOverview():
 	gameOverview.append(defaultWordOverview.duplicate())
 	gameOverview[-1]["word"] = selectedWord["word"]
@@ -233,6 +239,27 @@ func save_progress():
 		userData["highscore"] = totalPoints
 	userData["difficulty"] = difficulty
 	data_control.save_user_data(userData)
+func control_star_display(show):
+	if show:
+		$Stars.show()
+		# Show stars in game
+		for i in range(3):
+			var starNum = i + 1
+			var starObj = get_node("Stars/Star" + str(starNum))
+			var starAnimator = starObj.get_node("AnimationPlayer")
+			starAnimator.stop()
+			starObj.texture = starEmptyTexture
+			if selectedWord["stars"] >= starNum:
+				starObj.texture = starFilledTexture
+				print("star already | stars: " + str(selectedWord["stars"]))
+			elif possibleStarsAmount >= starNum:
+				starAnimator.play("StarFlickering")
+				print("possible star")
+	else:
+		$Stars.hide()
+		for i in range(3):
+			get_node("Stars/Star" + str(i + 1)).get_node("AnimationPlayer").stop()
+			get_node("Stars/Star" + str(i + 1)).texture = starEmptyTexture
 
 
 func _ready():
@@ -243,6 +270,7 @@ func _ready():
 	load_words()
 	new_word()
 	emit_signal("send_gamecontroller", self)
+	control_star_display(true)
 	timeLeft = GameTime
 	
 	

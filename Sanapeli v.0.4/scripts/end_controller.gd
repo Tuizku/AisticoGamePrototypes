@@ -1,9 +1,13 @@
 extends Control
 class_name end_controller
 
+var userData = data_control.load_user_data()
+var wordScene : PackedScene = load("res://scenes/word.tscn")
 var gameOverview = []
-var tryAgainTimer : int = 0
-var sensor_button_time : float = 0
+var time : float = 0
+var wordsShown = 0
+var wordsRevealed = 0
+var objs = []
 
 func _ready():
 	gameOverview = Global.GameOverview
@@ -14,6 +18,20 @@ func _ready():
 		if gameOverview[i]["points"] != 0: correct += 1
 	$CorrectLabel.text = str(correct) + "/6 oikein"
 	$PointsLabel.text = str(total_points) + " pistettä"
+
+func _physics_process(delta):
+	time += delta
+	if time < len(gameOverview) and time > wordsShown:
+		wordsShown += 1
+		objs.append(wordScene.instance())
+		$WordsContainer.add_child(objs[-1])
+		objs[-1].get_node("AnimationPlayer").play("SlideToScreen")
+	if time - 1 < len(gameOverview) and time > wordsRevealed + 1:
+		var word = gameOverview[len(objs) - 2]["word"]
+		var wordIndex = 0
+		for i in len(userData["words"]):
+			if userData["words"][i]["word"] == word: wordIndex = i
+		objs[-2].setup(word, userData["words"][wordIndex]["stars"])
 
 
 func _on_Button_pressed():

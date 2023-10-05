@@ -1,10 +1,39 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/hint font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://sprites/star_empty_glow.png" type="Texture" id=2]
 [ext_resource path="res://scripts/word_controller.gd" type="Script" id=3]
 
+[sub_resource type="Animation" id=1]
+resource_name = "SlideToScreen"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.5, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.5, 0.0 ]
+}
+
 [node name="WordControl" type="Control"]
+anchor_left = 1.5
+anchor_right = 1.5
 margin_right = 400.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 400, 50 )
@@ -41,3 +70,6 @@ anchor_bottom = 1.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/SlideToScreen = SubResource( 1 )

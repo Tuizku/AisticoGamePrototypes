@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://fonts/hint font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://fonts/big font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://fonts/font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scripts/end_controller.gd" type="Script" id=4]
 
@@ -15,46 +14,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.454902, 0.741176, 0.796078, 1 )
 
-[node name="Main Text" type="RichTextLabel" parent="."]
-visible = false
-modulate = Color( 0.937255, 0.905882, 0.737255, 1 )
-anchor_top = 0.325
-anchor_right = 1.0
-anchor_bottom = 0.525
-custom_fonts/normal_font = ExtResource( 2 )
-bbcode_enabled = true
-bbcode_text = "[center]?/6 oikein!"
-text = "?/6 oikein!"
-scroll_active = false
-
-[node name="Points Text" type="RichTextLabel" parent="."]
-visible = false
-modulate = Color( 0.937255, 0.905882, 0.737255, 1 )
-anchor_top = 0.525
-anchor_right = 1.0
-anchor_bottom = 0.65
-custom_fonts/normal_font = ExtResource( 3 )
-bbcode_enabled = true
-bbcode_text = "[center]??? pistettä"
-text = "??? pistettä"
-scroll_active = false
-
-[node name="How to Play Again Text" type="RichTextLabel" parent="."]
-visible = false
-modulate = Color( 0.937255, 0.905882, 0.737255, 0.545098 )
-anchor_top = 0.8
-anchor_right = 1.0
-anchor_bottom = 0.9
-custom_fonts/normal_font = ExtResource( 1 )
-bbcode_enabled = true
-bbcode_text = "[center](aloita uusi peli klikkaamalla)"
-text = "(aloita uusi peli klikkaamalla)"
-scroll_active = false
-
 [node name="Button" type="Button" parent="."]
-anchor_left = 0.35
 anchor_top = 0.75
-anchor_right = 0.65
+anchor_right = 0.24
 anchor_bottom = 0.9
 custom_fonts/font = ExtResource( 3 )
 text = "Uusi peli"
@@ -85,5 +47,11 @@ anchor_bottom = 0.25
 custom_fonts/font = ExtResource( 1 )
 text = "??? pistettä"
 valign = 1
+
+[node name="WordsContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.25
+anchor_top = 0.3
+anchor_right = 0.75
+anchor_bottom = 0.9
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
