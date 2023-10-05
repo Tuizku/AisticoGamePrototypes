@@ -3,16 +3,15 @@ extends Control
 # User Data Load and Save calls
 onready var userData = data_control.load_user_data()
 func _exit_tree(): data_control.save_user_data(userData)
-onready var wordsData = data_control.load_words()
+#onready var wordsData = data_control.load_words()
 
 var wordScene = load("res://scenes/word.tscn")
 
 
 func _ready():
-	for i in len(wordsData):
+	for i in len(userData["words"]):
 		var wordObj : Control = wordScene.instance()
-		if len(userData["stars"]) > i:
-			wordObj.setup(wordsData[i]["word"], userData["stars"][i])
+		wordObj.setup(userData["words"][i]["word"], userData["words"][i]["stars"])
 		$ScrollContainer/VBoxContainer.add_child(wordObj)
 
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hvew2PLXHCtyp7DLiIHwWjQx/borQld+vAumZEg1EJ3PymJXAV2Eq01gvBLXkiypGE6LgMPYa8f0NG/c3d3jhw==",
+  "dgSpecHash": "Z/a6DnBBEd6KGiOywQcJAnlxJLKK8FR8eF/KYPjCoFWprgCuZLGQYMpzCXzyrlSlcrIQdBNmsmPlj58MrfMf9A==",
   "success": true,
-  "projectFilePath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
+  "projectFilePath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\(C# itsekoodatut työkalut)\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Tuisku\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Tuisku\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",

@@ -1,17 +1,17 @@
 extends Control
 class_name end_controller
 
-var points : Array = []
+var gameOverview = []
 var tryAgainTimer : int = 0
 var sensor_button_time : float = 0
 
 func _ready():
-	points = Global.Points
+	gameOverview = Global.GameOverview
 	var correct = 0
 	var total_points = 0
-	for i in len(points):
-		total_points += points[i]
-		if points[i] != 0: correct += 1
+	for i in len(gameOverview):
+		total_points += gameOverview[i]["points"]
+		if gameOverview[i]["points"] != 0: correct += 1
 	$CorrectLabel.text = str(correct) + "/6 oikein"
 	$PointsLabel.text = str(total_points) + " pistettä"
 

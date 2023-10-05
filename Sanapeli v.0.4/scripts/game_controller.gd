@@ -1,28 +1,33 @@
 extends Control
 
 # Exports
-export var GameTime : float = 20
+export var GameTime : float = 25
+
 # Data and Nodes
 var wordsData
-var usedWords : Array = []
+var userData = data_control.load_user_data()
+var gameOverview = []
+var defaultWordOverview = {
+	"word" : "",
+	"earnedStars" : 0,
+	"points" : 0
+}
 var letterRarity : Array = ["aitneslo", "kuämvr", "jhypdögbfcwåqxz"]
 var middleText : RichTextLabel
 var rng : RandomNumberGenerator
 
 # Whole Game Variables
-var difficulty : float = 0.3 # between 0 and 1 (1 is hardest)
+var difficulty : float = 0 # between 0 and 1 (1 is hardest)
 var playingWordNum : int = 1
-var points : Array
 
 # One Game Variables
 var selectedWord
 var word : String = ""
 var word_start_chrs : Array
 var chrs : Array
+var possibleStarsAmount = 0
 var editingWord = true
 var editingCharIndex : int = 0
-var handPos : float = -1
-var boxSelectedTime : float = 0
 var timeLeft : float = 0
 
 # Signals
@@ -56,13 +61,28 @@ func new_word():
 		else: word += " "
 	check_word() # Finds the editingCharIndex
 func select_word():
-	# Selects a random word from data
-	var index
-	while true:
-		index = rng.randi_range(0, len(wordsData) - 1)
-		if not index in usedWords: break
-	selectedWord = wordsData[index]
-	usedWords.append(index)
+	# Create a pool where the word can be chosen randomly
+	var wordPool : Array = []
+	for i in len(userData["words"]):
+		# Check if the word has been played before
+		var notPlayedBefore = true
+		for i2 in len(gameOverview):
+			if gameOverview[i2]["word"] == userData["words"][i]["word"]:
+				notPlayedBefore = false
+		if notPlayedBefore == false: continue
+		
+		# Add words to the pool (less stars -> more instances in pool)
+		for _i2 in range(3 - userData["words"][i]["stars"]): 
+			wordPool.append(userData["words"][i])
+	if len(wordPool) == 0: wordPool = userData["words"]
+	
+	# Choose a random word from pool
+	selectedWord = wordPool[rng.randi_range(0, len(wordPool) - 1)]
+	
+	# How many stars could you get for this word?
+	if difficulty < 0.5: possibleStarsAmount = 1
+	elif difficulty < 0.8: possibleStarsAmount = 2
+	else: possibleStarsAmount = 3
 func select_chrs():
 	# Clear old chr data
 	word_start_chrs.clear()
@@ -133,8 +153,10 @@ func check_word():
 func cutscene():
 	# START OF CUTSCENE
 	
-	add_points()
+	#add_points()
+	update_gameOverview()
 	change_difficulty()
+	
 	editingWord = false
 	var time = max(0, timeLeft - 4)
 	
@@ -142,7 +164,8 @@ func cutscene():
 	# Show the correct word and if you were correct
 	emit_signal("hide_boxes", "sel")
 	emit_signal("answer_animation", word, selectedWord["word"])
-	if points[len(points) - 1] != 0: middleText.bbcode_text = "[center]" + funcs.random_correct_sentence()
+	if gameOverview[-1]["points"] != 0: 
+		middleText.bbcode_text = "[center]" + funcs.random_correct_sentence()
 	else: middleText.bbcode_text = "[center]" + funcs.random_wrong_sentence()
 	yield(get_tree().create_timer(4), "timeout")
 	
@@ -150,7 +173,8 @@ func cutscene():
 	# Potential finish to game
 	print("playingwordnum: " + str(playingWordNum))
 	if playingWordNum >= 6:
-		Global.Points = points
+		save_progress()
+		Global.GameOverview = gameOverview
 		yield(get_tree().create_timer(time), "timeout")
 		if get_tree().change_scene("res://scenes/end.tscn") != OK: print("scene change failed")
 		return
@@ -178,34 +202,49 @@ func cutscene():
 	editingWord = true
 	playingWordNum += 1
 	emit_signal("show_boxes", "all")
-func add_points():
-	points.append(0)
+func update_gameOverview():
+	gameOverview.append(defaultWordOverview.duplicate())
+	gameOverview[-1]["word"] = selectedWord["word"]
+	
 	if word == selectedWord["word"]:
-		var pointsIndex = len(points) - 1
+		gameOverview[-1]["earnedStars"] = max(0, possibleStarsAmount - selectedWord["stars"])
+		
 		for i in len(word):
 			if word_start_chrs[i] == "":
-				if word[i] in letterRarity[0]: points[pointsIndex] += 5
-				elif word[i] in letterRarity[1]: points[pointsIndex] += 10
-				elif word[i] in letterRarity[2]: points[pointsIndex] += 15
-		points[pointsIndex] += int(timeLeft / 2)
-		print(points[pointsIndex])
+				if word[i] in letterRarity[0]: gameOverview[-1]["points"] += 5
+				elif word[i] in letterRarity[1]: gameOverview[-1]["points"] += 10
+				elif word[i] in letterRarity[2]: gameOverview[-1]["points"] += 15
+		gameOverview[-1]["points"] += int(timeLeft / 2)
 func change_difficulty():
 	if word == selectedWord["word"]: # Word is correct
 		difficulty += 0.1 + 0.001 * timeLeft * len(word)
 	else: difficulty -= 0.3 - (len(word) - 4) * 0.05 # Word is wrong
 	difficulty = clamp(difficulty, 0, 1)
 	print("difficulty: ", difficulty)
-
+func save_progress():
+	var totalPoints = 0
+	for i in len(gameOverview):
+		var wordIndex = -1
+		for i2 in len(userData["words"]):
+			if userData["words"][i2]["word"] == gameOverview[i]["word"]: wordIndex = i2
+		userData["words"][wordIndex]["stars"] += gameOverview[i]["earnedStars"]
+		totalPoints += gameOverview[i]["points"]
+	if totalPoints > userData["highscore"]:
+		userData["highscore"] = totalPoints
+	userData["difficulty"] = difficulty
+	data_control.save_user_data(userData)
 
 
 func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
+	difficulty = userData["difficulty"]
 	
 	load_words()
 	new_word()
 	emit_signal("send_gamecontroller", self)
 	timeLeft = GameTime
+	
 	
 	middleText = get_node("Middle Text Container").get_node("Middle Text") as RichTextLabel
 	middleText.bbcode_text = "[center]" + str(selectedWord["definition"])
@@ -218,9 +257,10 @@ func _physics_process(delta: float) -> void:
 	# Start a new word by calling cutscene
 	if (timeLeft <= 0):
 		if editingWord == true:
-			if editingCharIndex != -1:
-				emit_signal("char_chosen", chrs[handPos], editingCharIndex)
-				word[editingCharIndex] = chrs[handPos]
+			#if editingCharIndex != -1:
+				
+				#emit_signal("char_chosen", chrs[handPos], editingCharIndex)
+				#word[editingCharIndex] = chrs[handPos]
 			editingCharIndex = -1
 			#emit_signal("editing_char_selected", editingCharIndex)
 			cutscene()

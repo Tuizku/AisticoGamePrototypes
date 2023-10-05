@@ -1,9 +1,22 @@
 class_name data_control
 
 const path = "user://user_data.json"
+#const defaultData = {
+#	"stars": [],
+#	"highscore" : 0,
+#	"sounds" : true,
+#	"mailSceneShown": false
+#}
 const defaultData = {
-	"stars": [],
+	"words" : [
+		{
+			"word" : "",
+			"definition" : "",
+			"stars" : 0
+		}
+	],
 	"highscore" : 0,
+	"difficulty" : 0.3,
 	"sounds" : true,
 	"mailSceneShown": false
 }
@@ -12,7 +25,16 @@ static func save_user_data(data):
 	var file = File.new()
 	var saveData
 	if data != null: saveData = data
-	else: saveData = defaultData.duplicate()
+	else: 
+		saveData = defaultData.duplicate()
+		var wordsData = load_words()
+		for i in len(wordsData):
+			var word
+			if i >= len(saveData["words"]):
+				word = defaultData["words"][0].duplicate()
+				saveData["words"].append(word)
+			saveData["words"][i]["word"] = wordsData[i]["word"]
+			saveData["words"][i]["definition"] = wordsData[i]["definition"]
 	file.open(path, File.WRITE)
 	file.store_var(to_json(saveData))
 	file.close()

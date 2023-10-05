@@ -146,11 +146,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
+      "projectUniqueName": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\(C# itsekoodatut työkalut)\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
       "projectName": "Sanakirja Search",
-      "projectPath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
+      "projectPath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\(C# itsekoodatut työkalut)\\Sanakirja Search (v.0.1)\\Sanakirja Search\\Sanakirja Search.csproj",
       "packagesPath": "C:\\Users\\Tuisku\\.nuget\\packages\\",
-      "outputPath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\Sanakirja Search (v.0.1)\\Sanakirja Search\\obj\\",
+      "outputPath": "D:\\Coding Projects\\Aistico Godot\\AisticoGamePrototypes\\(C# itsekoodatut työkalut)\\Sanakirja Search (v.0.1)\\Sanakirja Search\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Tuisku\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,3 +1,3 @@
 extends Node
 
-var Points : Array = []
+var GameOverview = []

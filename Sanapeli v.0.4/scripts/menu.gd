@@ -1,10 +1,11 @@
 extends Control
 
 # User Data Load and Save calls
-onready var userData = data_control.load_user_data()
+var userData = data_control.load_user_data()
 func _exit_tree(): data_control.save_user_data(userData)
 
 func _ready():
+	if userData == null: userData = data_control.load_user_data()
 	if userData["sounds"] == true: $VolumeButton/OnTexture.show()
 	else: $VolumeButton/OnTexture.hide()
 

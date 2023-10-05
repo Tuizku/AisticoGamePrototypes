@@ -1,203 +1,339 @@
 [
   {
-    "word": "jahti",
-    "definition": "Metsästysretki tai suuri vene."
+    "word": "aihe",
+    "definition": "Tietty teema tai asia, josta keskustellaan tai kirjoitetaan."
   },
   {
-    "word": "kävely",
-    "definition": "Hitaasti etenevä liikkumistapa, yleensä jalkaisin."
+    "word": "aivot",
+    "definition": "Keskeinen hermoston elin, joka ohjaa toimintoja."
   },
   {
-    "word": "pilkku",
-    "definition": "Kirjallinen merkki, usein käytetään lauseiden erottamiseen."
-  },
-  {
-    "word": "mela",
-    "definition": "Työväline, jolla liikutetaan venettä vedessä."
-  },
-  {
-    "word": "varaus",
-    "definition": "Paikan tai palvelun ennakkojärjestely."
-  },
-  {
-    "word": "este",
-    "definition": "Mikä tahansa haitta tai rajoitus liikkeelle tai toiminnalle."
-  },
-  {
-    "word": "arvata",
-    "definition": "Päätellä tai tehdä oletus ilman täydellistä tietoa."
-  },
-  {
-    "word": "sokeri",
-    "definition": "Makea aine, käytetään usein ruoan makeuttamiseen."
-  },
-  {
-    "word": "kuva",
-    "definition": "Visuaalinen esitys tai valokuva."
-  },
-  {
-    "word": "armo",
-    "definition": "Sääli tai anteeksianto."
-  },
-  {
-    "word": "soikio",
-    "definition": "Ellipsin muotoinen."
-  },
-  {
-    "word": "teksti",
-    "definition": "Kirjoitettu tai painettu ilmaisu."
-  },
-  {
-    "word": "hellä",
-    "definition": "Lempeä ja huolehtiva."
-  },
-  {
-    "word": "virhe",
-    "definition": "Moka tai epätarkkuus."
-  },
-  {
-    "word": "uinti",
-    "definition": "Veteen liikkumistapa uiden."
-  },
-  {
-    "word": "kiltti",
-    "definition": "Ystävällinen ja hyväsydäminen."
-  },
-  {
-    "word": "kinata",
-    "definition": "Kiistellä tai väitellä."
+    "word": "almu",
+    "definition": "Vähävaraiselle annettava apu tai lahjoitus."
   },
   {
     "word": "arkki",
     "definition": "Ohut ja litteä paperin tai materiaalin pala."
   },
   {
-    "word": "kärki",
-    "definition": "Terävä osa esineen päässä tai huippu."
+    "word": "armo",
+    "definition": "Sääli tai anteeksianto."
   },
   {
-    "word": "rock",
-    "definition": "Voimakas ja rytmikäs musiikkityyli."
-  },
-  {
-    "word": "piha",
-    "definition": "Tontin tai talon ympärillä oleva avoin alue."
-  },
-  {
-    "word": "neuvo",
-    "definition": "Ohje, vinkki tai suositus."
-  },
-  {
-    "word": "kahvi",
-    "definition": "Kofeiinipitoinen kuuma juoma."
-  },
-  {
-    "word": "elämys",
-    "definition": "Intensiivinen ja vaikuttava kokemus."
-  },
-  {
-    "word": "hera",
-    "definition": "Maidon osa, joka jää juuston valmistuksen yhteydessä."
-  },
-  {
-    "word": "rölli",
-    "definition": "Kuvitteellinen hahmo suomalaisissa lastensaduissa."
-  },
-  {
-    "word": "pouta",
-    "definition": "Sateeton ja pilvetön säätila."
-  },
-  {
-    "word": "kytkeä",
-    "definition": "Liittää laite tai järjestelmä toimintaan."
-  },
-  {
-    "word": "lakki",
-    "definition": "Päähine, joka suojaa päätä ja usein myös korvia."
-  },
-  {
-    "word": "hytti",
-    "definition": "Pieni huone esimerkiksi laivassa tai junassa."
-  },
-  {
-    "word": "leuka",
-    "definition": "Kasvojen alaosa, jossa sijaitsevat suu ja leuanluu."
-  },
-  {
-    "word": "onki",
-    "definition": "Kalastusväline, joka koostuu siimasta ja koukusta."
-  },
-  {
-    "word": "meemi",
-    "definition": "Kuvan, tekstin tai idean humoristinen leviäminen verkossa."
-  },
-  {
-    "word": "elämä",
-    "definition": "Organismien olemassaolo ja tapahtumat yleensä."
-  },
-  {
-    "word": "paluu",
-    "definition": "Matkan tai tapahtuman jälkeinen palaaminen takaisin."
-  },
-  {
-    "word": "ämpäri",
-    "definition": "Tavallisesti pyöreä astia, jolla voi kantaa nestettä tai muuta."
-  },
-  {
-    "word": "kulut",
-    "definition": "Käytetyn energian tai resurssien määrä."
-  },
-  {
-    "word": "oire",
-    "definition": "Taudin tai tilan ilmeneminen, oireet voivat viitata ongelmaan."
-  },
-  {
-    "word": "veitsi",
-    "definition": "Terävätyökalu leikkaamiseen tai viiltämiseen."
-  },
-  {
-    "word": "vauva",
-    "definition": "Aivan nuori ihmisen jälkeläinen."
-  },
-  {
-    "word": "neste",
-    "definition": "Olomuoto, jossa aineella ei ole pysyvää muotoa."
-  },
-  {
-    "word": "mitta",
-    "definition": "Numeroarvo, joka ilmaisee suureen suuruuden."
-  },
-  {
-    "word": "farssi",
-    "definition": "Koominen teatteriesitys tai tilanne, usein överiksi vedetty."
+    "word": "arvata",
+    "definition": "Päätellä tai tehdä oletus ilman täydellistä tietoa."
   },
   {
     "word": "ateria",
     "definition": "Ruokailun yhteydessä nautittava kokonaisuus ruokia."
   },
   {
-    "word": "kitka",
-    "definition": "Vastustava voima, joka hidastaa liikettä pintojen välillä."
+    "word": "betoni",
+    "definition": "Rakennusmateriaali, joka koostuu sementistä, hiekasta ja vedestä."
   },
   {
-    "word": "levy",
-    "definition": "Litteä ja ohut esine, usein musiikkia tai tietoa tallentava."
+    "word": "elpyä",
+    "definition": "Toipua tai palautua."
   },
   {
-    "word": "pitkä",
-    "definition": "Suuri pituudeltaan, päinvastainen kuin lyhyt."
+    "word": "elämys",
+    "definition": "Intensiivinen ja vaikuttava kokemus."
   },
   {
-    "word": "huikka",
-    "definition": "Pikkuinen kulaukseen tarkoitettu määrä."
+    "word": "elämä",
+    "definition": "Organismien olemassaolo ja tapahtumat yleensä."
+  },
+  {
+    "word": "elää",
+    "definition": "Olla elossa ja kokea elämän tapahtumia."
+  },
+  {
+    "word": "este",
+    "definition": "Mikä tahansa haitta tai rajoitus liikkeelle tai toiminnalle."
+  },
+  {
+    "word": "farssi",
+    "definition": "Koominen teatteriesitys tai tilanne, usein överiksi vedetty."
   },
   {
     "word": "harppu",
     "definition": "Musiikki-instrumentti, joka soitetaan sormilla tai plektralla."
   },
   {
+    "word": "haukka",
+    "definition": "Riippuvainen lintulaji tai saalistava lintu."
+  },
+  {
+    "word": "hellä",
+    "definition": "Lempeä ja huolehtiva."
+  },
+  {
+    "word": "hera",
+    "definition": "Maidon osa, joka jää juuston valmistuksen yhteydessä."
+  },
+  {
+    "word": "hioa",
+    "definition": "Pinnan tasoitus tai teroitus."
+  },
+  {
+    "word": "huikka",
+    "definition": "Pikkuinen kulaukseen tarkoitettu määrä."
+  },
+  {
+    "word": "hytti",
+    "definition": "Pieni huone esimerkiksi laivassa tai junassa."
+  },
+  {
+    "word": "hyvyys",
+    "definition": "Hyväntahtoisuus ja rehellisyys."
+  },
+  {
+    "word": "höyhen",
+    "definition": "Pieni ja kevyt sulkakarva."
+  },
+  {
+    "word": "isoisä",
+    "definition": "Isovanhempi, yleensä isän isä."
+  },
+  {
+    "word": "jahti",
+    "definition": "Metsästysretki tai suuri vene."
+  },
+  {
+    "word": "kahvi",
+    "definition": "Kofeiinipitoinen kuuma juoma."
+  },
+  {
+    "word": "kehä",
+    "definition": "Pyöreä tai renkaanmuotoinen muoto tai alue."
+  },
+  {
+    "word": "keinu",
+    "definition": "Istuintyyppinen leikkiväline, joka liikkuu edestakaisin."
+  },
+  {
+    "word": "kilpi",
+    "definition": "Suojus tai aseellinen suojusväline."
+  },
+  {
+    "word": "kiltti",
+    "definition": "Ystävällinen ja hyväsydäminen."
+  },
+  {
+    "word": "kina",
+    "definition": "Kiista tai riita."
+  },
+  {
+    "word": "kinata",
+    "definition": "Kiistellä tai väitellä."
+  },
+  {
+    "word": "kinkku",
+    "definition": "Sianlihasta valmistettu ruokalaji, usein juhlapöydässä."
+  },
+  {
+    "word": "kitka",
+    "definition": "Vastustava voima, joka hidastaa liikettä pintojen välillä."
+  },
+  {
+    "word": "koivu",
+    "definition": "Puu, jolla on valkoiset kuori ja lehdet."
+  },
+  {
+    "word": "kooste",
+    "definition": "Yhteenveto tai kokoelma asioista."
+  },
+  {
+    "word": "kulut",
+    "definition": "Käytetyn energian tai resurssien määrä."
+  },
+  {
+    "word": "kuva",
+    "definition": "Visuaalinen esitys tai valokuva."
+  },
+  {
+    "word": "kylmä",
+    "definition": "Alhainen lämpötila tai viileys."
+  },
+  {
+    "word": "kytkeä",
+    "definition": "Liittää laite tai järjestelmä toimintaan."
+  },
+  {
+    "word": "kärki",
+    "definition": "Terävä osa esineen päässä tai huippu."
+  },
+  {
+    "word": "kärsiä",
+    "definition": "Tuntea kipua, haittaa tai vastoinkäymisiä."
+  },
+  {
+    "word": "kävely",
+    "definition": "Hitaasti etenevä liikkumistapa, yleensä jalkaisin."
+  },
+  {
+    "word": "laina",
+    "definition": "Rahanlainaus tai velkaantuminen."
+  },
+  {
+    "word": "lakki",
+    "definition": "Päähine, joka suojaa päätä ja usein myös korvia."
+  },
+  {
+    "word": "lato",
+    "definition": "Rakennus, jossa säilytetään maataloustuotteita."
+  },
+  {
+    "word": "lepo",
+    "definition": "Tila, jossa keho ja mieli saavat levätä ja palautua."
+  },
+  {
+    "word": "leuka",
+    "definition": "Kasvojen alaosa, jossa sijaitsevat suu ja leuanluu."
+  },
+  {
+    "word": "levy",
+    "definition": "Litteä ja ohut esine, usein musiikkia tai tietoa tallentava."
+  },
+  {
+    "word": "lilja",
+    "definition": "Kukka, jolla on kaunis ja tuoksuva kukinto."
+  },
+  {
+    "word": "lounas",
+    "definition": "Päivän keskipäivän ateria."
+  },
+  {
+    "word": "lumi",
+    "definition": "Vesi jääkiteiden muodossa, joka peittää maan talvella."
+  },
+  {
+    "word": "maito",
+    "definition": "Eläimen maidosta valmistettu juoma."
+  },
+  {
+    "word": "maltti",
+    "definition": "Kärsivällisyys tai itsehillintä."
+  },
+  {
+    "word": "meemi",
+    "definition": "Kuvan, tekstin tai idean humoristinen leviäminen verkossa."
+  },
+  {
+    "word": "mela",
+    "definition": "Työväline, jolla liikutetaan venettä vedessä."
+  },
+  {
+    "word": "mitta",
+    "definition": "Numeroarvo, joka ilmaisee suureen suuruuden."
+  },
+  {
     "word": "myrkky",
     "definition": "Myrkyllinen aine, voi aiheuttaa vahinkoa tai kuoleman."
+  },
+  {
+    "word": "neste",
+    "definition": "Olomuoto, jossa aineella ei ole pysyvää muotoa."
+  },
+  {
+    "word": "neuvo",
+    "definition": "Ohje, vinkki tai suositus."
+  },
+  {
+    "word": "oire",
+    "definition": "Taudin tai tilan ilmeneminen, oireet voivat viitata ongelmaan."
+  },
+  {
+    "word": "onki",
+    "definition": "Kalastusväline, joka koostuu siimasta ja koukusta."
+  },
+  {
+    "word": "orava",
+    "definition": "Pieni nisäkäs, joka asustaa puissa ja kerää pähkinöitä."
+  },
+  {
+    "word": "outlet",
+    "definition": "Paikka, josta voi ostaa tuotteita alennettuun hintaan."
+  },
+  {
+    "word": "paljon",
+    "definition": "Suuri määrä tai määrällisesti runsas."
+  },
+  {
+    "word": "paluu",
+    "definition": "Matkan tai tapahtuman jälkeinen palaaminen takaisin."
+  },
+  {
+    "word": "parkki",
+    "definition": "Paikka, johon autot pysäköidään."
+  },
+  {
+    "word": "pesä",
+    "definition": "Eläinten tai lintujen koti tai lisääntymispaikka."
+  },
+  {
+    "word": "piha",
+    "definition": "Tontin tai talon ympärillä oleva avoin alue."
+  },
+  {
+    "word": "pilkku",
+    "definition": "Kirjallinen merkki, usein käytetään lauseiden erottamiseen."
+  },
+  {
+    "word": "pilvi",
+    "definition": "Ilmakehän vesihöyrystä muodostuva ilmiö."
+  },
+  {
+    "word": "pitkä",
+    "definition": "Suuri pituudeltaan, päinvastainen kuin lyhyt."
+  },
+  {
+    "word": "pouta",
+    "definition": "Sateeton ja pilvetön säätila."
+  },
+  {
+    "word": "ravuri",
+    "definition": "Ravihevosrotu tai kilpaileva raviratsu."
+  },
+  {
+    "word": "rikkoa",
+    "definition": "Aiheuttaa vahinkoa tai hajottaa jotain."
+  },
+  {
+    "word": "ripsi",
+    "definition": "Silmäkarvojen osa, joka suojaa silmiä."
+  },
+  {
+    "word": "rock",
+    "definition": "Voimakas ja rytmikäs musiikkityyli."
+  },
+  {
+    "word": "rokote",
+    "definition": "Lääkeaine, joka auttaa suojaamaan sairauksilta."
+  },
+  {
+    "word": "rölli",
+    "definition": "Kuvitteellinen hahmo suomalaisissa lastensaduissa."
+  },
+  {
+    "word": "seteli",
+    "definition": "Rahayksikkö tai maksuväline paperin muodossa."
+  },
+  {
+    "word": "sietää",
+    "definition": "Kestää tai sallia jotain epämiellyttävää."
+  },
+  {
+    "word": "soikio",
+    "definition": "Ellipsin muotoinen."
+  },
+  {
+    "word": "sokeri",
+    "definition": "Makea aine, käytetään usein ruoan makeuttamiseen."
+  },
+  {
+    "word": "syöksy",
+    "definition": "Nopea lasku tai sukellus."
   },
   {
     "word": "talo",
@@ -208,103 +344,59 @@
     "definition": "Toimia tehokkaasti tai tuottavasti."
   },
   {
-    "word": "tuuli",
-    "definition": "Ilman liikkeestä aiheutuva ilmiö, tuottaa ilmavirtauksia."
+    "word": "teksti",
+    "definition": "Kirjoitettu tai painettu ilmaisu."
   },
   {
     "word": "tuhma",
     "definition": "Käyttäytyminen, joka rikkoo sääntöjä tai normeja."
   },
   {
-    "word": "hyvyys",
-    "definition": "Hyväntahtoisuus ja rehellisyys."
-  },
-  {
-    "word": "orava",
-    "definition": "Pieni nisäkäs, joka asustaa puissa ja kerää pähkinöitä."
-  },
-  {
-    "word": "betoni",
-    "definition": "Rakennusmateriaali, joka koostuu sementistä, hiekasta ja vedestä."
-  },
-  {
-    "word": "elää",
-    "definition": "Olla elossa ja kokea elämän tapahtumia."
+    "word": "tuuli",
+    "definition": "Ilman liikkeestä aiheutuva ilmiö, tuottaa ilmavirtauksia."
   },
   {
     "word": "tässä",
     "definition": "Lähellä oleva paikka tai ajankohta."
   },
   {
-    "word": "aihe",
-    "definition": "Tietty teema tai asia, josta keskustellaan tai kirjoitetaan."
-  },
-  {
-    "word": "paljon",
-    "definition": "Suuri määrä tai määrällisesti runsas."
-  },
-  {
-    "word": "rokote",
-    "definition": "Lääkeaine, joka auttaa suojaamaan sairauksilta."
-  },
-  {
-    "word": "viiri",
-    "definition": "Lipun tapainen lippu, joka heiluu tuulessa."
-  },
-  {
-    "word": "kärsiä",
-    "definition": "Tuntea kipua, haittaa tai vastoinkäymisiä."
-  },
-  {
     "word": "töyssy",
     "definition": "Tien epätasaisuus, kuten kohouma tai kuoppa."
   },
   {
-    "word": "lounas",
-    "definition": "Päivän keskipäivän ateria."
+    "word": "uinti",
+    "definition": "Veteen liikkumistapa uiden."
   },
   {
-    "word": "outlet",
-    "definition": "Paikka, josta voi ostaa tuotteita alennettuun hintaan."
-  },
-  {
-    "word": "kooste",
-    "definition": "Yhteenveto tai kokoelma asioista."
-  },
-  {
-    "word": "parkki",
-    "definition": "Paikka, johon autot pysäköidään."
-  },
-  {
-    "word": "rikkoa",
-    "definition": "Aiheuttaa vahinkoa tai hajottaa jotain."
-  },
-  {
-    "word": "keinu",
-    "definition": "Istuintyyppinen leikkiväline, joka liikkuu edestakaisin."
+    "word": "ulappa",
+    "definition": "Laaja meren osa, joka ulottuu rannikolta."
   },
   {
     "word": "vaahto",
     "definition": "Ilmakuplilla täytetty neste, kuten saippuavesi."
   },
   {
-    "word": "pesä",
-    "definition": "Eläinten tai lintujen koti tai lisääntymispaikka."
+    "word": "varaus",
+    "definition": "Paikan tai palvelun ennakkojärjestely."
   },
   {
-    "word": "kinkku",
-    "definition": "Sianlihasta valmistettu ruokalaji, usein juhlapöydässä."
+    "word": "vauva",
+    "definition": "Aivan nuori ihmisen jälkeläinen."
   },
   {
-    "word": "almu",
-    "definition": "Vähävaraiselle annettava apu tai lahjoitus."
+    "word": "veitsi",
+    "definition": "Terävätyökalu leikkaamiseen tai viiltämiseen."
   },
   {
-    "word": "lepo",
-    "definition": "Tila, jossa keho ja mieli saavat levätä ja palautua."
+    "word": "viiri",
+    "definition": "Lipun tapainen lippu, joka heiluu tuulessa."
   },
   {
-    "word": "kehä",
-    "definition": "Pyöreä tai renkaanmuotoinen muoto tai alue."
+    "word": "virhe",
+    "definition": "Moka tai epätarkkuus."
+  },
+  {
+    "word": "ämpäri",
+    "definition": "Tavallisesti pyöreä astia, jolla voi kantaa nestettä tai muuta."
   }
 ]

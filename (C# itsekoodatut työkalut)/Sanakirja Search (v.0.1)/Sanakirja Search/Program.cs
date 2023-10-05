@@ -9,8 +9,8 @@ DirectoryInfo? dir = Directory.GetParent(System.Reflection.Assembly.GetExecuting
 List<string> wordBook = File.ReadAllLines($"{dir}/finnish_plain_words.txt").ToList();
 
 // Game Data Paths with different devices
-string laptopPath = "D:/Files/AisticoGamePrototypes/Sanapeli v.0.3/data/words.json";
-string pcPath = "D:/Coding Projects/Aistico Godot/AisticoGamePrototypes/Sanapeli v.0.3/data/words.json";
+string laptopPath = "D:/Files/AisticoGamePrototypes/Sanapeli v.0.3/data/words.json"; // v.0.3 laptop path!!!
+string pcPath = "D:/Coding Projects/Aistico Godot/AisticoGamePrototypes/Sanapeli v.0.4/data/words.json"; // v.0.4 pc path!!!
 string gameDataPath = "";
 string pathCommand = Input("pc/laptop game data path?: ");
 if (pathCommand == "pc") gameDataPath = pcPath;
@@ -379,6 +379,14 @@ while (true)
         Save.SaveJson(wordsData, gameDataPath);
 
         Console.WriteLine("words saved successfully\n");
+    }
+    else if (command == "sort")
+    {
+        List<HintWord>? wordsData = Save.LoadJson(gameDataPath, typeof(List<HintWord>)) as List<HintWord>;
+        if (wordsData == null) continue;
+        wordsData.Sort((a, b) => string.Compare(a.word, b.word, StringComparison.OrdinalIgnoreCase));
+        for (int i = 0; i < wordsData.Count; i++) Console.WriteLine(wordsData[i].word);
+        if (Input("save (yes/no): ") == "yes") Save.SaveJson(wordsData, gameDataPath);
     }
     else if (command == "exit") Environment.Exit(0);
 }
