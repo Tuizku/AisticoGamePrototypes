@@ -1,10 +1,10 @@
 extends Control
 
 # Exports
-export var GameTime : float = 10
+export var GameTime : float = 25
 
 # Data and Nodes
-var wordsData
+#var wordsData
 var userData = data_control.load_user_data()
 var gameOverview = []
 var defaultWordOverview = {
@@ -48,8 +48,6 @@ signal answer_animation(answer, cor_answer) # True or false?
 
 
 # Functions
-func load_words():
-	wordsData = data_control.load_words()
 func new_word():
 	select_word()
 	select_chrs()
@@ -158,26 +156,28 @@ func cutscene():
 	
 	update_gameOverview()
 	change_difficulty()
-	selectedWord["stars"] = possibleStarsAmount
 	
 	editingWord = false
 	var time = max(0, timeLeft - 4)
 	
 	
 	# Show the correct word and if you were correct
-	control_star_display(true)
+	if word == selectedWord["word"]: control_star_display(true, possibleStarsAmount)
+	else: control_star_display(true, 0)
 	emit_signal("hide_boxes", "sel")
 	emit_signal("answer_animation", word, selectedWord["word"])
 	if gameOverview[-1]["points"] != 0: 
 		middleText.bbcode_text = "[center]" + funcs.random_correct_sentence()
 	else: middleText.bbcode_text = "[center]" + funcs.random_wrong_sentence()
 	yield(get_tree().create_timer(4), "timeout")
+	control_star_display(false)
 	
 	
 	# Potential finish to game
 	print("playingwordnum: " + str(playingWordNum))
 	if playingWordNum >= 6:
 		save_progress()
+		print("saved")
 		Global.GameOverview = gameOverview
 		yield(get_tree().create_timer(time), "timeout")
 		if get_tree().change_scene("res://scenes/end.tscn") != OK: print("scene change failed")
@@ -207,13 +207,14 @@ func cutscene():
 	editingWord = true
 	playingWordNum += 1
 	emit_signal("show_boxes", "all")
-	control_star_display(true)
 func update_gameOverview():
 	gameOverview.append(defaultWordOverview.duplicate())
 	gameOverview[-1]["word"] = selectedWord["word"]
 	
 	if word == selectedWord["word"]:
 		gameOverview[-1]["earnedStars"] = max(0, possibleStarsAmount - selectedWord["stars"])
+		if gameOverview[-1]["earnedStars"] > 3: gameOverview[-1]["earnedStars"] = 3
+		print("earned stars: " + str(gameOverview[-1]["earnedStars"]))
 		
 		for i in len(word):
 			if word_start_chrs[i] == "":
@@ -233,28 +234,29 @@ func save_progress():
 		var wordIndex = -1
 		for i2 in len(userData["words"]):
 			if userData["words"][i2]["word"] == gameOverview[i]["word"]: wordIndex = i2
+		print("already stars: " + str(userData["words"][wordIndex]["stars"]) + " | new stars: " + str(gameOverview[i]["earnedStars"]))
 		userData["words"][wordIndex]["stars"] += gameOverview[i]["earnedStars"]
+		if userData["words"][wordIndex]["stars"] > 3: userData["words"][wordIndex]["stars"] = 3
+		
 		totalPoints += gameOverview[i]["points"]
 	if totalPoints > userData["highscore"]:
 		userData["highscore"] = totalPoints
 	userData["difficulty"] = difficulty
 	data_control.save_user_data(userData)
-func control_star_display(show):
+func control_star_display(show, _stars = selectedWord["stars"]):
 	if show:
 		$Stars.show()
 		# Show stars in game
 		for i in range(3):
 			var starNum = i + 1
 			var starObj = get_node("Stars/Star" + str(starNum))
-			var starAnimator = starObj.get_node("AnimationPlayer")
-			starAnimator.stop()
+			#var starAnimator = starObj.get_node("AnimationPlayer")
+			#starAnimator.stop()
 			starObj.texture = starEmptyTexture
-			if selectedWord["stars"] >= starNum:
+			if _stars >= starNum:
 				starObj.texture = starFilledTexture
-				print("star already | stars: " + str(selectedWord["stars"]))
-			elif possibleStarsAmount >= starNum:
-				starAnimator.play("StarFlickering")
-				print("possible star")
+			#elif possibleStarsAmount >= starNum:
+				#starAnimator.play("StarFlickering")
 	else:
 		$Stars.hide()
 		for i in range(3):
@@ -267,10 +269,8 @@ func _ready():
 	rng.randomize()
 	difficulty = userData["difficulty"]
 	
-	load_words()
 	new_word()
 	emit_signal("send_gamecontroller", self)
-	control_star_display(true)
 	timeLeft = GameTime
 	
 	

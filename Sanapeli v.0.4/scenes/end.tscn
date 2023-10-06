@@ -1,25 +1,24 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://fonts/hint font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://sprites/button.png" type="Texture" id=2]
 [ext_resource path="res://fonts/font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scripts/end_controller.gd" type="Script" id=4]
+[ext_resource path="res://sprites/button_clicked.png" type="Texture" id=5]
+[ext_resource path="res://sprites/arrow2.png" type="Texture" id=6]
+[ext_resource path="res://sprites/book.png" type="Texture" id=7]
+[ext_resource path="res://sprites/background_sanapeli.png" type="Texture" id=8]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.454902, 0.741176, 0.796078, 1 )
-
-[node name="Button" type="Button" parent="."]
-anchor_top = 0.75
-anchor_right = 0.24
-anchor_bottom = 0.9
-custom_fonts/font = ExtResource( 3 )
-text = "Uusi peli"
+texture = ExtResource( 8 )
+expand = true
 
 [node name="MainLabel" type="Label" parent="."]
 anchor_top = 0.015
@@ -54,4 +53,44 @@ anchor_top = 0.3
 anchor_right = 0.75
 anchor_bottom = 0.9
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[node name="MenuButton" type="TextureButton" parent="."]
+anchor_left = 0.825
+anchor_top = 0.025
+anchor_right = 0.985
+anchor_bottom = 0.25
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="Texture" type="TextureRect" parent="MenuButton"]
+modulate = Color( 0.388235, 1, 0.439216, 1 )
+anchor_left = 0.2
+anchor_top = 0.15
+anchor_right = 0.8
+anchor_bottom = 0.85
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="WordlistButton" type="TextureButton" parent="."]
+anchor_left = 0.015
+anchor_top = 0.025
+anchor_right = 0.175
+anchor_bottom = 0.25
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="Texture" type="TextureRect" parent="WordlistButton"]
+anchor_left = 0.2
+anchor_top = 0.15
+anchor_right = 0.8
+anchor_bottom = 0.85
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[connection signal="pressed" from="MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="WordlistButton" to="." method="_on_WordlistButton_pressed"]

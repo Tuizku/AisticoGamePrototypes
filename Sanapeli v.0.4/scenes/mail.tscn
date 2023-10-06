@@ -67,3 +67,4 @@ valign = 1
 clip_text = true
 
 [connection signal="pressed" from="LaterButton" to="." method="_on_LaterButton_pressed"]
+[connection signal="pressed" from="SendButton" to="." method="_on_SendButton_pressed"]

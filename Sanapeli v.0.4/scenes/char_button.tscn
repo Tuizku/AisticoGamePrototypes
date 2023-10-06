@@ -184,7 +184,7 @@ expand = true
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="."]
-modulate = Color( 1, 0.639216, 0.517647, 1 )
+modulate = Color( 0.584314, 0.482353, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 29.0

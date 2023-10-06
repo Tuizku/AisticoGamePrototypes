@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/char_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/game_controller.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://fonts/hint font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://sprites/star_empty_glow.png" type="Texture" id=7]
 [ext_resource path="res://sprites/star_filled_glow.png" type="Texture" id=8]
+[ext_resource path="res://sprites/background_sanapeli.png" type="Texture" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "StarFlickering"
@@ -65,10 +66,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="Background color" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.454902, 0.741176, 0.796078, 1 )
+texture = ExtResource( 9 )
+expand = true
 
 [node name="Sel Char Boxes" type="Control" parent="."]
 anchor_top = 0.65
@@ -141,6 +143,7 @@ text = "sulje"
 flat = true
 
 [node name="Stars" type="HBoxContainer" parent="."]
+visible = false
 anchor_top = 0.02
 anchor_right = 1.0
 anchor_bottom = 0.12
