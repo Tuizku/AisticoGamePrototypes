@@ -3,8 +3,12 @@ extends Control
 export var Type : String = ""
 
 var letterRarity : Array = ["aitneslo", "kuämvr", "jhypdögbfcwåqxz"]
-var normal_texture = ResourceLoader.load("res://sprites/char_box.png")
-var inverted_texture = ResourceLoader.load("res://sprites/char_box_inverted.png")
+#var normal_texture = ResourceLoader.load("res://sprites/char_box.png")
+#var inverted_texture = ResourceLoader.load("res://sprites/char_box_inverted.png")
+var gold_texture = ResourceLoader.load("res://sprites/box_gold.png")
+var gold_clicked_texture = ResourceLoader.load("res://sprites/box_gold_clicked.png")
+var silver_texture = ResourceLoader.load("res://sprites/box_silver.png")
+var silver_clicked_texture = ResourceLoader.load("res://sprites/box_silver_clicked.png")
 
 var boxes = []
 var boxButtons = []
@@ -63,6 +67,11 @@ func create_char_boxes(_count):
 		# Fix label bugs
 		boxTexts[i].margin_right = 0
 		boxTexts[i].margin_bottom = 0
+		
+		# Colors
+		boxTexts[i].modulate = Color("666666")
+		#boxButtons[i].texture_normal = silver_texture
+		#boxButtons[i].texture_pressed = silver_clicked_texture
 	
 	if gameController != null: connect_buttons()
 
@@ -87,14 +96,17 @@ func _on_Control_char_chosen(_char, _index):
 func _on_Control_editing_char_selected(_index):
 	for i in len(boxes):
 		if i == _index:
-			boxes[i].modulate = Color.white
+			#boxes[i].modulate = Color.white
 			boxAnimators[i].play("Editing")
 		else: 
 			boxAnimators[i].play("Stop Editing")
 			
 		if wordStartChrs[i] == "":
-			boxes[i].modulate = Color.white
-		else: boxes[i].modulate = Color.gray
+			boxButtons[i].texture_normal = silver_texture
+			boxButtons[i].texture_pressed = silver_clicked_texture
+		else: 
+			#boxes[i].modulate = Color.gray
+			boxButtons[i].texture_normal = silver_clicked_texture
 
 
 func _on_Control_word_created(_word_start):
@@ -113,21 +125,28 @@ func _on_Control_show_boxes(type):
 
 
 func _on_Control_answer_animation(answer, cor_answer):
-	for i in len(boxes):
-		boxes[i].modulate = Color.gray
+	for i in len(boxButtons):
+		boxButtons[i].texture_normal = silver_texture
+		boxButtons[i].texture_pressed = silver_texture
+		boxTexts[i].modulate = Color("666666")
 	
 	if answer == cor_answer:
 		for i in len(boxAnimators):
-			boxes[i].modulate = Color.white
+			boxButtons[i].texture_normal = gold_texture
+			boxButtons[i].texture_normal = gold_texture
+			boxTexts[i].modulate = Color("957b00")
 			boxAnimators[i].play("Jumping")
 			yield(get_tree().create_timer(0.2), "timeout")
 	else:
 		for i in len(boxAnimators):
-			boxes[i].modulate = Color.white
 			boxAnimators[i].play("Fall")
-			if answer[i] != cor_answer[i]: 
-				boxButtons[i].texture_normal = inverted_texture
-				boxTexts[i].modulate = Color("FFF6C9")
+			if answer[i] == cor_answer[i]:
+				boxButtons[i].texture_normal = gold_texture
+				boxTexts[i].modulate = Color("957b00")
+			else: 
+				#boxButtons[i].texture_normal = silver_texture
+				#boxButtons[i].texture_pressed = silver_clicked_texture
+				#boxTexts[i].modulate = Color("8C8C8C")
 				boxTexts[i].text = cor_answer[i].to_upper()
 			yield(get_tree().create_timer(0.2), "timeout")
 

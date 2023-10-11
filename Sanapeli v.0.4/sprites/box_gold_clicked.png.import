@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/char_box_inverted_clicked.png-fcd014e5c7702383dba06d0e1903bdec.stex"
+path="res://.import/box_gold_clicked.png-a8148229f4740f09e4bc62e117e5da4c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/char_box_inverted_clicked.png"
-dest_files=[ "res://.import/char_box_inverted_clicked.png-fcd014e5c7702383dba06d0e1903bdec.stex" ]
+source_file="res://sprites/box_gold_clicked.png"
+dest_files=[ "res://.import/box_gold_clicked.png-a8148229f4740f09e4bc62e117e5da4c.stex" ]
 
 [params]
 
