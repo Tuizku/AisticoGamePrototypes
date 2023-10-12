@@ -17,7 +17,7 @@ func post_to_subscribe(email: String, list_name: String, url: String):
 	var headers = ["Content-Type: application/x-www-form-urlencoded"]
 	http_request.request(url, headers, false, HTTPClient.METHOD_POST, post_string)
 
-func _on_request_completed(result, response_code, headers, body):
+func _on_request_completed(_result, response_code, _headers, _body):
 	if response_code == 200:
 		print("Successfully subscribed.")
 	else:
@@ -31,5 +31,7 @@ func _on_LaterButton_pressed():
 
 
 func _on_SendButton_pressed():
-	pass
-	# post_to_subscribe("somebody@example.com", "demo", "https://aistico.com/data/sanaemails/append.php")
+	var mail = $LineEdit.text
+	if mail != "" and "@" in mail:
+		post_to_subscribe(mail, "sanapelistä kiinnostuneet", "https://aistico.com/data/sanaemails/append.php")
+	else: $LineEdit.text = "sähköposti virheellinen..."
