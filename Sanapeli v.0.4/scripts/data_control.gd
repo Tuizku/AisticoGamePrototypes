@@ -52,8 +52,8 @@ static func load_user_data():
 
 static func load_words():
 	var file = File.new()
-	if not file.file_exists("res://data/words.json"):
+	if not file.file_exists("res://data/words.tres"):
 		return null
-	file.open("res://data/words.json", File.READ)
+	file.open("res://data/words.tres", File.READ)
 	var text = file.get_as_text()
 	return parse_json(text)
