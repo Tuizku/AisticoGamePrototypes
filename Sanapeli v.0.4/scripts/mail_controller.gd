@@ -9,6 +9,7 @@ func post_to_subscribe(email: String, list_name: String, url: String):
 		return
    
 	var http_request = HTTPRequest.new()
+	http_request.name = "HTTPRequest"
 	self.add_child(http_request)
 	http_request.connect("request_completed", self, "_on_request_completed")
  
@@ -19,9 +20,9 @@ func post_to_subscribe(email: String, list_name: String, url: String):
 
 func _on_request_completed(_result, response_code, _headers, _body):
 	if response_code == 200:
-		print("Successfully subscribed.")
+		change_scene("menu")
 	else:
-		print("Failed to subscribe with response code: ", response_code)
+		$LineEdit.text = "error: " + str(response_code)
    
 	# Cleanup
 	self.remove_child(get_node("HTTPRequest"))

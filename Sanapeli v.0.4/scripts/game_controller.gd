@@ -177,7 +177,6 @@ func cutscene():
 	print("playingwordnum: " + str(playingWordNum))
 	if playingWordNum >= 6:
 		save_progress()
-		print("saved")
 		Global.GameOverview = gameOverview
 		yield(get_tree().create_timer(time), "timeout")
 		if get_tree().change_scene("res://scenes/end.tscn") != OK: print("scene change failed")
@@ -307,6 +306,3 @@ func remove_char_from_word(id: int):
 	word[id] = " "
 	check_word()
 
-
-func _on_Quit_Button_pressed():
-	get_tree().quit()

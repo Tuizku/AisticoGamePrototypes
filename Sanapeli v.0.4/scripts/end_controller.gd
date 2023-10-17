@@ -9,6 +9,9 @@ var time : float = 0
 var wordsShown = 0
 var objs = []
 
+func change_scene(name):
+	if get_tree().change_scene("res://scenes/" + name + ".tscn") != OK: print("scene change failed")
+
 func _ready():
 	gameOverview = Global.GameOverview
 	var correct = 0
@@ -38,8 +41,18 @@ func _physics_process(delta):
 
 
 func _on_MenuButton_pressed():
-	if get_tree().change_scene("res://scenes/menu.tscn") != OK: print("scene change failed")
+	
+	if not userData["mailSceneShown"]:
+		var wordsWithoutStars = 0
+		for word in userData["words"]:
+			if word["stars"] == 0: wordsWithoutStars += 1
+		if wordsWithoutStars == 0:
+			userData["mailSceneShown"] = true
+			data_control.save_user_data(userData)
+			change_scene("mail")
+	
+	change_scene("menu")
 
 
 func _on_WordlistButton_pressed():
-	if get_tree().change_scene("res://scenes/wordlist.tscn") != OK: print("scene change failed")
+	change_scene("wordlist")
